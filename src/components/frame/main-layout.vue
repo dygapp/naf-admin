@@ -13,16 +13,16 @@
   </el-aside>
   <el-container>
     <el-header class="header" :height="layout.headerHeight">
-      <i class="gaf-icons" :class="{'gaf-icon-unfold': menuCollapse, 'gaf-icon-fold': !menuCollapse,}" @click="toggleMenu"></i>
+      <i class="naf-icons" :class="{'naf-icon-unfold': menuCollapse, 'naf-icon-fold': !menuCollapse,}" @click="toggleMenu"></i>
       <el-dropdown class="right">
         <span class="el-dropdown-link">
-          <i class="gaf-icons gaf-icon-avatar"></i>
+          <i class="naf-icons naf-icon-avatar"></i>
           <span class="name">管理員</span>
         </span>
         <el-dropdown-menu class="action-menu" slot="dropdown">
-          <el-dropdown-item><i class="gaf-icons gaf-icon-user"></i><span>个人中心</span></el-dropdown-item>
-          <el-dropdown-item><i class="gaf-icons gaf-icon-setting"></i>设置</el-dropdown-item>
-          <el-dropdown-item divided><i class="gaf-icons gaf-icon-quit"></i>退出</el-dropdown-item>
+          <el-dropdown-item><i class="naf-icons naf-icon-user"></i><span>个人中心</span></el-dropdown-item>
+          <el-dropdown-item><i class="naf-icons naf-icon-setting"></i>设置</el-dropdown-item>
+          <el-dropdown-item divided><i class="naf-icons naf-icon-quit"></i>退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>            
     </el-header>
@@ -91,7 +91,7 @@ export default {
     line-height: 64px;
     background: #20a0ff;
     color: #fff;
-    .gaf-icon-avatar {
+    .naf-icon-avatar {
       margin-right: 4px;
       color: rgba(255, 255, 255, 0.8);
       font-size: 20px;
@@ -144,7 +144,7 @@ export default {
   }
 }
 .action-menu {
-  .gaf-icons {
+  .naf-icons {
     margin-right: 4px;
   }
 }

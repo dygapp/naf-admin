@@ -4,7 +4,7 @@ import pages from './pages';
 /**
  * 菜单定义
  *  title 菜单标题
- *  icon 菜单图标,如果使用element-ui的图标，直接用图标全名，如：el-icon-menu;如果使用gaf图标，只写图标名字，如：user，实际上使用图标gaf-icon-user
+ *  icon 菜单图标,如果使用element-ui的图标，直接用图标全名，如：el-icon-menu;如果使用naf图标，只写图标名字，如：user，实际上使用图标naf-icon-user
  *  children 子菜单项
  *  url 外链地址
  *  target 打开方式：_self、_blank
@@ -15,35 +15,35 @@ import pages from './pages';
 const datas = [
   {
     title: '系统管理',
-    icon: 'menu',
+    icon: 'system',
     children: [
       {
         title: '用户管理',
         path: '/system/user',
         page: 'naf.user',
-        icon: 'user',
+        icon: 'account',
       },
       {
         title: '部门管理',
         path: '/system/dept',
         page: 'naf.dept',
-        icon: 'user',
+        icon: 'dept',
       },
       {
         title: '标签管理',
         path: '/system/tag',
         page: 'naf.tag',
-        icon: 'user',
+        icon: 'tag',
       },
       {
         title: '字典管理',
         path: '/system/dict',
         page: 'naf.dict',
-        icon: 'user',
+        icon: 'dict',
       },
       {
         title: '操作日志',
-        icon: 'menu',
+        icon: 'log',
         path: '/systme/log',
         page: 'naf.log',
       },
@@ -51,25 +51,43 @@ const datas = [
   },
   {
     title: '公文管理',
-    icon: 'menu',
+    icon: 'doc',
     children: [
       {
         title: '发文管理',
         path: '/doc/send',
         page: 'doc.send',
-        icon: 'user',
+        icon: 'doc',
       },
       {
         title: '回执管理',
         path: '/doc/receipt',
         page: 'doc.receipt',
-        icon: 'user',
+        icon: 'receipt',
       },
       {
         title: '通知管理',
         path: '/doc/notice',
         page: 'doc.notice',
-        icon: 'user',
+        icon: 'comments',
+      },
+    ],
+  },
+  {
+    title: '企业管理',
+    icon: 'corp',
+    children: [
+      {
+        title: '企业信息',
+        path: '/corp/info',
+        page: 'corp.info',
+        icon: 'info',
+      },
+      {
+        title: '企业用户',
+        path: '/corp/user',
+        page: 'corp.user',
+        icon: 'corpuser',
       },
     ],
   },

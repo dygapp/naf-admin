@@ -1,18 +1,18 @@
 <template>
   <el-menu default-active="0" class="nav-menu" v-bind="themeStyles"
      :collapse="isCollapse" :router="false">
-    <gaf-menu-item v-for="(item,idx) in menus" :key="idx" :index="idx.toString()" :title="item.title"
+    <naf-menu-item v-for="(item,idx) in menus" :key="idx" :index="idx.toString()" :title="item.title"
       :options="item.options" :children="item.children" :target="item.target">
-    </gaf-menu-item>
+    </naf-menu-item>
   </el-menu>
 </template>
 <script>
 import { menus } from '@/utils/menus';
-import GafMenuItem from './menu-item';
+import NafMenuItem from './menu-item';
 
 export default {
   components: {
-    GafMenuItem,
+    NafMenuItem,
   },
   props: {
     theme: String,

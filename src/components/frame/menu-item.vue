@@ -4,9 +4,9 @@
         <i :class="iconCls" v-if="hasIcon"></i>
         <span slot="title">{{title}}</span>
       </template>
-      <gaf-menu-item v-for="(item, idx) in children" :key="idx" :index="index+'-'+idx" 
+      <naf-menu-item v-for="(item, idx) in children" :key="idx" :index="index+'-'+idx" 
         :title="item.title" :children="item.children" :options="item.options">
-      </gaf-menu-item>
+      </naf-menu-item>
     </el-submenu>
     <el-menu-item :index="index" @click="menuClick" v-else><i :class="iconCls"></i>
       <span slot="title">{{title}}</span>
@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-  name: 'gaf-menu-item',
+  name: 'naf-menu-item',
   props: {
     title: String,
     index: String,
@@ -40,7 +40,7 @@ export default {
     },
     iconCls() {
       if (this.options.icon && !(this.options.icon.indexOf('el-') === 0)) {
-        return `gaf-icons gaf-icon-${this.options.icon}`;
+        return `naf-icons naf-icon-${this.options.icon}`;
       }
       return this.options.icon;
     },

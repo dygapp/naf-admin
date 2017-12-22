@@ -11,10 +11,10 @@
           </div>
 		    	<el-form class="main" :model="loginForm" :rules="rules" ref="loginForm">
 						<el-form-item prop="username">
-							<el-input v-model="loginForm.username" placeholder="用户名" prefix-icon="gaf-icons gaf-icon-user"><span>dsfsf</span></el-input>
+							<el-input v-model="loginForm.username" placeholder="用户名" prefix-icon="naf-icons naf-icon-user"><span>dsfsf</span></el-input>
 						</el-form-item>
 						<el-form-item prop="password">
-							<el-input type="password" placeholder="密码" v-model="loginForm.password" prefix-icon="gaf-icons gaf-icon-password"></el-input>
+							<el-input type="password" placeholder="密码" v-model="loginForm.password" prefix-icon="naf-icons naf-icon-password"></el-input>
 						</el-form-item>
 						<el-form-item>
 								<el-button type="primary" @click="submitForm('loginForm')" :style="{width: '100%'}">登录</el-button>
