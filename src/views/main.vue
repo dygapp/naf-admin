@@ -1,9 +1,9 @@
 <template>
-  <router-view id="app"></router-view>
+  <Layout id="app"></Layout>
 </template>
 
 <script>
-import Layout from './components/frame/main-layout';
+import Layout from '~/components/frame/main-layout';
 
 export default {
   components: {
@@ -11,4 +11,3 @@ export default {
   },
 };
 </script>
-
