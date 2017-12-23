@@ -8,7 +8,7 @@
         </router-link>
         <h1>{{name}}</h1>
       </el-header>    
-      <el-main><my-menu theme="light" :is-collapse="menuCollapse"></my-menu></el-main>
+      <el-main :collapse="menuCollapse"><my-menu theme="light" :is-collapse="menuCollapse"></my-menu></el-main>
     </el-container>
   </el-aside>
   <el-container>
@@ -112,10 +112,14 @@ export default {
     }
     .el-main {
       padding: 0;
-      overflow: inherit;
+      overflow: auto;
+      background: #fff;
       .el-menu {
         height: 100%;
       }
+    }
+    .el-main[collapse] {
+      overflow: initial;
     }
     .el-header {
       border-right: solid 1px #e6e6e6;

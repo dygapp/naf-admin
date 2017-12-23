@@ -11,6 +11,7 @@ const pages = {
     dept: () => import('@/views/naf/dept.vue'),
     tag: () => import('@/views/naf/tag.vue'),
     dict: () => import('@/views/naf/dict.vue'),
+    cert: () => import('@/views/naf/cert.vue'),
     log: () => import('@/views/naf/log.vue'),
   },
   /* 公文管理页面 */
@@ -23,6 +24,18 @@ const pages = {
   corp: {
     info: () => import('@/views/corp/info.vue'),
     user: () => import('@/views/corp/user.vue'),
+  },
+  /* 招聘管理页面 */
+  job: {
+    info: () => import('@/views/job/job-info.vue'),
+    fair: () => import('@/views/job/job-fair.vue'),
+    talk: () => import('@/views/job/campus-talk.vue'),
+  },
+  /* 招聘管理页面 */
+  cms: {
+    notice: () => import('@/views/cms/notice.vue'),
+    policy: () => import('@/views/cms/policy.vue'),
+    news: () => import('@/views/cms/news.vue'),
   },
 };
 export default pages;

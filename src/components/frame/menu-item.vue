@@ -9,7 +9,10 @@
       </naf-menu-item>
     </el-submenu>
     <el-menu-item :index="index" @click="menuClick" v-else><i :class="iconCls"></i>
-      <span slot="title">{{title}}</span>
+      <span slot="title" v-if="title.length<10 && !hasTooltip">{{title}}</span>
+      <el-tooltip slot="title"  v-else :content="hasTooltip?options.tooltip:title" placement="top" effect="light">
+        <span>{{ title.length>9 ? (title.substr(0,9)+'...') : title }}</span>
+      </el-tooltip>
     </el-menu-item>
 </template>
 <script>
@@ -37,6 +40,9 @@ export default {
     },
     hasIcon() {
       return this.options.icon && this.options.icon.length > 0;
+    },
+    hasTooltip() {
+      return this.options.tooltip && this.options.tooltip.length > 0;
     },
     iconCls() {
       if (this.options.icon && !(this.options.icon.indexOf('el-') === 0)) {
