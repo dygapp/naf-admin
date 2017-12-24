@@ -1,6 +1,6 @@
 import Login from '@/views/login';
 import Main from '@/views/main';
-import Home from '@/views/demo/home';
+import Dashboard from '@/views/demo/dashboard';
 import Error403 from '@/components/error/403';
 import Error404 from '@/components/error/404';
 import Error500 from '@/components/error/500';
@@ -20,7 +20,7 @@ const _routes = [
     children: [
       {
         path: '',
-        component: Home,
+        component: Dashboard,
         name: 'home',
         hidden: true,
         meta: { requiresAuth: true },
