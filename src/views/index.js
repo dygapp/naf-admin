@@ -14,6 +14,10 @@ const pages = {
     cert: () => import('@/views/naf/cert.vue'),
     log: () => import('@/views/naf/log.vue'),
   },
+  /* 系统管理页面 */
+  sys: {
+    site: () => import('@/views/sys/site.vue'),
+  },
   /* 公文管理页面 */
   doc: {
     send: () => import('@/views/doc/send.vue'),
@@ -23,6 +27,8 @@ const pages = {
   /* 企业管理页面 */
   corp: {
     info: () => import('@/views/corp/info.vue'),
+    check: () => import('@/views/corp/check.vue'),
+    points: () => import('@/views/corp/points.vue'),
     user: () => import('@/views/corp/user.vue'),
   },
   /* 招聘管理页面 */

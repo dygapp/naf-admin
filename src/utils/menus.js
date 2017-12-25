@@ -37,6 +37,12 @@ const datas = [
         icon: 'cert',
       },
       {
+        title: '分站管理',
+        path: '/system/site',
+        page: 'sys.site',
+        icon: 'site',
+      },
+      {
         title: '操作日志',
         icon: 'log',
         path: '/systme/log',
@@ -44,57 +50,69 @@ const datas = [
       },
     ],
   },
-  {
-    title: '公文管理',
-    icon: 'doc',
-    children: [
-      {
-        title: '内部发文',
-        path: '/doc/send',
-        page: 'doc.send',
-        icon: 'doc3',
-      },
-      {
-        title: '外部发文',
-        path: '/doc/send',
-        page: 'doc.send',
-        icon: 'doc1',
-      },
-      {
-        title: '内部收文',
-        path: '/doc/send',
-        page: 'doc.send',
-        icon: 'doc4',
-      },
-      {
-        title: '外部收文',
-        path: '/doc/send',
-        page: 'doc.send',
-        icon: 'doc2',
-      },
-      {
-        title: '回执管理',
-        path: '/doc/receipt',
-        page: 'doc.receipt',
-        icon: 'receipt',
-      },
-      {
-        title: '通知管理',
-        path: '/doc/notice',
-        page: 'doc.notice',
-        icon: 'comments',
-      },
-    ],
-  },
+  // {
+  //   title: '公文管理',
+  //   icon: 'doc',
+  //   children: [
+  //     {
+  //       title: '内部发文',
+  //       path: '/doc/send',
+  //       page: 'doc.send',
+  //       icon: 'doc3',
+  //     },
+  //     {
+  //       title: '外部发文',
+  //       path: '/doc/send',
+  //       page: 'doc.send',
+  //       icon: 'doc1',
+  //     },
+  //     {
+  //       title: '内部收文',
+  //       path: '/doc/send',
+  //       page: 'doc.send',
+  //       icon: 'doc4',
+  //     },
+  //     {
+  //       title: '外部收文',
+  //       path: '/doc/send',
+  //       page: 'doc.send',
+  //       icon: 'doc2',
+  //     },
+  //     {
+  //       title: '回执管理',
+  //       path: '/doc/receipt',
+  //       page: 'doc.receipt',
+  //       icon: 'receipt',
+  //     },
+  //     {
+  //       title: '通知管理',
+  //       path: '/doc/notice',
+  //       page: 'doc.notice',
+  //       icon: 'comments',
+  //     },
+  //   ],
+  // },
   {
     title: '企业管理',
     icon: 'corp',
     children: [
       {
-        title: '企业信息',
+        title: '注册审核',
+        path: '/corp/check',
+        page: 'corp.check',
+        icon: 'shenhe',
+      },
+      {
+        title: '信息认证',
         path: '/corp/info',
         page: 'corp.info',
-        icon: 'info',
+        icon: 'renzheng',
+      },
+      {
+        title: '积分体系',
+        path: '/corp/points',
+        page: 'corp.points',
+        icon: 'jifen',
       },
       {
         title: '企业用户',

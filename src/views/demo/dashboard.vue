@@ -53,18 +53,16 @@ export default {
     async getSevenData() {
       const apiArr = [[], [], []];
       this.sevenDay.forEach(() => {
-        apiArr[0].push(Math.floor(Math.random() * 1000));
-        apiArr[1].push(Math.floor(Math.random() * 1000));
-        apiArr[2].push(Math.floor(Math.random() * 1000));
+        apiArr[0].push(Math.floor(Math.random() * 100));
+        apiArr[1].push(Math.floor(Math.random() * 100));
+        apiArr[2].push(Math.floor(Math.random() * 100));
       });
       const promiseArr = [...apiArr[0], ...apiArr[1], ...apiArr[2]];
       Promise.all(promiseArr)
         .then((res) => {
           const resArr = [[], [], []];
           res.forEach((item, index) => {
-            if (item.status === 1) {
-              resArr[Math.floor(index / 7)].push(item.count);
-            }
+            resArr[Math.floor(index / 7)].push(item);
           });
           this.sevenDate = resArr;
         })

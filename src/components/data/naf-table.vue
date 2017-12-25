@@ -5,24 +5,17 @@
         <el-input placeholder="请输入内容" class="input-with-select" :clearable="true" size="mini" 
           v-model="fieldValue">
           <el-select slot="prepend" placeholder="请选择" width="110" v-model="fieldName">
-            <el-option label="姓名" value="xm"></el-option>
-            <el-option label="登录名" value="account"></el-option>
+            <el-option v-for="(item,index) in filters" :label="item" :value="item" :key="'filter'+index"></el-option>
           </el-select>
           <el-button slot="append" icon="el-icon-search" @click="query"></el-button>
         </el-input>
       </div>            
-      <el-button icon="el-icon-plus" type="primary" size="mini">添加用户</el-button>
+      <el-button icon="el-icon-plus" type="primary" size="mini" v-if="showAction">添加</el-button>
     </el-header>
     <el-main>
       <el-table border style="width: 100%;overflow: auto;" size="mini">  
-        <el-table-column label="姓名"></el-table-column>
-        <el-table-column label="登录名"></el-table-column>
-        <el-table-column label="性别"></el-table-column>
-        <el-table-column label="职位"></el-table-column>
-        <el-table-column label="手机号"></el-table-column>
-        <el-table-column label="电话"></el-table-column>
-        <el-table-column label="电子邮件"></el-table-column>
-        <el-table-column label="操作"></el-table-column>
+        <el-table-column v-for="(item,index) in fields" :label="item" :key="'field'+index"></el-table-column>
+        <el-table-column label="操作" v-if="showAction"></el-table-column>
       </el-table>
     </el-main>
     <el-footer height="36px"> 
@@ -34,6 +27,12 @@
 </template>
 <script>
 export default {
+  name: 'naf-table',
+  props: {
+    fields: Array,
+    filters: Array,
+    readonly: Boolean,
+  },
   data() {
     return {
       loading: false,
@@ -43,6 +42,7 @@ export default {
       size: 20,
       fieldName: '',
       fieldValue: '',
+      showAction: !(this.readonly),
     };
   },
   mounted() {
