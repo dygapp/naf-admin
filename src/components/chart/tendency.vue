@@ -1,7 +1,7 @@
 <template>
-    <div class="line1">
-        <div id="line1" class="" style="width: 90%;height:450px;"></div>
-    </div>
+  <div class="line1">
+    <div id="line1" class="" style="width: 90%;height:450px;"></div>
+  </div>
 </template>
 
 <script>
@@ -28,29 +28,29 @@ export default {
         color: colors,
         title: {
           text: '走势图',
-          subtext: '',
+          subtext: ''
         },
         tooltip: {
-          trigger: 'axis',
+          trigger: 'axis'
         },
         legend: {
-          data: ['新注册用户', '新增信息', '新增管理员'],
+          data: ['新注册用户', '新增信息', '新增管理员']
         },
         toolbox: {
           show: true,
           feature: {
             dataZoom: {
-              yAxisIndex: 'none',
+              yAxisIndex: 'none'
             },
             dataView: { readOnly: false },
             magicType: { type: ['bar', 'line'] },
-            restore: {},
-          },
+            restore: {}
+          }
         },
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: this.sevenDay,
+          data: this.sevenDay
         },
         yAxis: [
           {
@@ -61,12 +61,12 @@ export default {
             position: 'left',
             axisLine: {
               lineStyle: {
-                color: '#999',
-              },
+                color: '#999'
+              }
             },
             axisLabel: {
-              formatter: '{value}',
-            },
+              formatter: '{value}'
+            }
           },
           {
             type: 'value',
@@ -76,13 +76,13 @@ export default {
             position: 'right',
             axisLine: {
               lineStyle: {
-                color: '#999',
-              },
+                color: '#999'
+              }
             },
             axisLabel: {
-              formatter: '{value}',
-            },
-          },
+              formatter: '{value}'
+            }
+          }
         ],
         series: [
           {
@@ -91,8 +91,8 @@ export default {
             data: this.sevenDate[0],
             yAxisIndex: 1,
             markPoint: {
-              data: [{ type: 'max', name: '最大值' }, { type: 'min', name: '最小值' }],
-            },
+              data: [{ type: 'max', name: '最大值' }, { type: 'min', name: '最小值' }]
+            }
           },
           {
             name: '新增信息',
@@ -100,8 +100,8 @@ export default {
             data: this.sevenDate[1],
             yAxisIndex: 1,
             markPoint: {
-              data: [{ type: 'max', name: '最大值' }, { type: 'min', name: '最小值' }],
-            },
+              data: [{ type: 'max', name: '最大值' }, { type: 'min', name: '最小值' }]
+            }
           },
           {
             name: '新增管理员',
@@ -109,13 +109,13 @@ export default {
             data: this.sevenDate[2],
             yAxisIndex: 1,
             markPoint: {
-              data: [{ type: 'max', name: '最大值' }, { type: 'min', name: '最小值' }],
-            },
-          },
-        ],
+              data: [{ type: 'max', name: '最大值' }, { type: 'min', name: '最小值' }]
+            }
+          }
+        ]
       };
       this.myChart.setOption(option);
-    },
+    }
   },
   watch: {
     sevenDate() {
@@ -123,13 +123,13 @@ export default {
     },
     sevenDay() {
       this.initData();
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="less">
-@import "~style/mixin";
+@import '~style/mixin';
 .line1 {
   display: flex;
   justify-content: center;

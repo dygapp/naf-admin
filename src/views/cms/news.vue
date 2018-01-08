@@ -1,12 +1,12 @@
 <template>
-  <naf-table :fields="fields" :filters="filters"></naf-table>
+  <demo-table :fields="fields" :filters="filters"></demo-table>
 </template>
 <<script>
-import NafTable from '@/components/data/naf-table';
+import DemoTable from '@/components/data/demo-table';
 
 export default {
   components: {
-    NafTable,
+    DemoTable,
   },
   data() {
     return {

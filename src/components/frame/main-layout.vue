@@ -1,46 +1,55 @@
 <template>
   <el-container class="layout">
-  <el-aside :width="asideWidth" class="sider">
     <el-container>
-      <el-header class="logo" :height="layout.headerHeight" >
-        <router-link to="/">
-          <img src="~/assets/logo1.svg" alt="logo" style="height:32px;width:32px;" />
-        </router-link>
-        <h1>{{name}}</h1>
-      </el-header>    
-      <el-main :collapse="menuCollapse"><my-menu theme="light" :is-collapse="menuCollapse"></my-menu></el-main>
-    </el-container>
-  </el-aside>
-  <el-container>
-    <el-header class="header" :height="layout.headerHeight">
-      <i class="naf-icons" :class="{'naf-icon-unfold': menuCollapse, 'naf-icon-fold': !menuCollapse,}" @click="toggleMenu"></i>
-      <el-dropdown class="right">
-        <span class="el-dropdown-link">
-          <i class="naf-icons naf-icon-avatar"></i>
-          <span class="name">管理員</span>
-        </span>
-        <el-dropdown-menu class="action-menu" slot="dropdown">
-          <el-dropdown-item><i class="naf-icons naf-icon-user"></i><span>个人中心</span></el-dropdown-item>
-          <el-dropdown-item><i class="naf-icons naf-icon-setting"></i>设置</el-dropdown-item>
-          <el-dropdown-item divided><i class="naf-icons naf-icon-quit"></i>退出</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>            
-    </el-header>
-    <el-main>
-      <el-container class="content">
-        <el-header :height="layout.breadHeight">
-          <my-bread></my-bread>
+      <el-aside :width="asideWidth" class="sider">
+        <el-container>
+          <el-header class="logo" :height="layout.headerHeight">
+            <router-link to="/">
+              <img src="~/assets/logo1.svg" alt="logo" style="height:32px;width:32px;" />
+            </router-link>
+            <h1>{{name}}</h1>
+          </el-header>
+          <el-main :collapse="menuCollapse">
+            <my-menu theme="light" :is-collapse="menuCollapse"></my-menu>
+          </el-main>
+        </el-container>
+      </el-aside>
+      <el-container>
+        <el-header class="header" :height="layout.headerHeight">
+          <i class="naf-icons" :class="{'naf-icon-unfold': menuCollapse, 'naf-icon-fold': !menuCollapse,}" @click="toggleMenu"></i>
+          <el-dropdown class="right">
+            <span class="el-dropdown-link">
+              <i class="naf-icons naf-icon-avatar"></i>
+              <span class="name">管理員</span>
+            </span>
+            <el-dropdown-menu class="action-menu" slot="dropdown">
+              <el-dropdown-item>
+                <i class="naf-icons naf-icon-user"></i>
+                <span>个人中心</span>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <i class="naf-icons naf-icon-setting"></i>设置</el-dropdown-item>
+              <el-dropdown-item divided>
+                <i class="naf-icons naf-icon-quit"></i>退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </el-header>
-        <el-main>
-          <transition>
-            <router-view></router-view>
-          </transition>
+        <el-main class="content">
+          <div class="bread" :height="layout.breadHeight">
+            <my-bread></my-bread>
+          </div>
+          <div class="page">
+            <transition>
+              <router-view></router-view>
+            </transition>
+          </div>
         </el-main>
       </el-container>
-    </el-main>
-    <el-footer class="footer" height="layout.footerHeight"><my-footer></my-footer></el-footer>
+    </el-container>
+    <el-footer class="footer" height="layout.footerHeight">
+      <my-footer></my-footer>
+    </el-footer>
   </el-container>
-</el-container>
 </template>
 <script>
 import config from '@/utils/config';
@@ -55,27 +64,27 @@ export default {
     MyHeader,
     MyFooter,
     MyMenu,
-    MyBread,
+    MyBread
   },
   data() {
     return {
       menuCollapse: false,
       name: config.shortName,
-      layout,
+      layout
     };
   },
   methods: {
     toggleMenu() {
       this.menuCollapse = !this.menuCollapse;
-    },
+    }
   },
   computed: {
     asideWidth() {
       return this.menuCollapse
         ? layout.asideCollapseWidth
         : layout.asideExpandWidth;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -144,9 +153,19 @@ export default {
     float: right;
   }
   .content {
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding: 10px;
+    .bread, .page {
+      padding: 10px;
+    }
+    .page {
+      flex: 1;
+    }
   }
 }
+
 .action-menu {
   .naf-icons {
     margin-right: 4px;

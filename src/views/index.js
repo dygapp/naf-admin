@@ -13,6 +13,7 @@ const pages = {
     dict: () => import('@/views/naf/dict.vue'),
     cert: () => import('@/views/naf/cert.vue'),
     log: () => import('@/views/naf/log.vue'),
+    contacts: () => import('@/views/naf/contacts.vue'),
   },
   /* 系统管理页面 */
   sys: {

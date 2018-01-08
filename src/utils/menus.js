@@ -7,6 +7,12 @@ const datas = [
     icon: 'system',
     children: [
       {
+        title: '通讯录',
+        path: '/system/contacts',
+        page: 'naf.contacts',
+        icon: 'account ',
+      },
+      {
         title: '用户管理',
         path: '/system/user',
         page: 'naf.user',

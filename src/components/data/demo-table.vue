@@ -1,7 +1,7 @@
 <template>
 	<el-container class="container">
     <el-header height="36px" style="line-height:36px;">
-      <div class="filter-box" v-if="filters && filters.length>0">
+      <div class="filter-box">
         <el-input placeholder="请输入内容" class="input-with-select" :clearable="true" size="mini" 
           v-model="fieldValue">
           <el-select slot="prepend" placeholder="请选择" width="110" v-model="fieldName">
@@ -9,13 +9,13 @@
           </el-select>
           <el-button slot="append" icon="el-icon-search" @click="query"></el-button>
         </el-input>
-      </div>    
+      </div>            
       <el-button icon="el-icon-plus" type="primary" size="mini" v-if="showAction">添加</el-button>
-      <slot name="actionBar"></slot>        
     </el-header>
     <el-main>
       <el-table border style="width: 100%;overflow: auto;" size="mini">  
-        <slot></slot>
+        <el-table-column v-for="(item,index) in fields" :label="item" :key="'field'+index"></el-table-column>
+        <el-table-column label="操作" v-if="showAction"></el-table-column>
       </el-table>
     </el-main>
     <el-footer height="36px"> 
@@ -27,15 +27,11 @@
 </template>
 <script>
 export default {
-  name: 'naf-table',
+  name: 'demo-table',
   props: {
-    dataSource: Array,
     fields: Array,
     filters: Array,
     readonly: Boolean,
-    showQuery: Boolean,
-    showPage: Boolean,
-    total: Number,
   },
   data() {
     return {

@@ -49,5 +49,6 @@ module.exports = {
     'no-console': 'off',
     'no-underscore-dangle': 'off',
     'no-tabs': 'off',
+    'comma-dangle': 'off',
   }
 }

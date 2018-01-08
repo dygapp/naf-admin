@@ -5,7 +5,7 @@ import * as types from '~/store/mutation-types';
 // shape: [{ id, quantity }]
 const _state = {
   loading: false,
-  authorized: false,
+  authorized: true,
   userinfo: null,
 };
 
