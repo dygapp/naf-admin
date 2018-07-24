@@ -241,11 +241,13 @@ const datas = [
 
 const MapMenu = item => ({
   title: item.title,
-  options: { icon: item.icon,
+  options: {
+    icon: item.icon,
     path: item.path,
     url: item.url,
     target: item.target,
-    tooltip: item.tooltip },
+    tooltip: item.tooltip
+  },
   children: (item.children || []).map(MapMenu),
 });
 
@@ -279,14 +281,12 @@ const MapRoute = (catalog = []) => item => [{
   component: typeof (item.page) === 'string' ? DeepGetPropertyValue(pages, item.page) : item.page || pages.Error404,
   meta: { catalog: catalog.concat(item.title) },
 },
-].concat(
-      (item.children || []).map(MapRoute(catalog.concat(item.title)))
-                        .reduce((p, c) => p.concat(c), [])
-                        .filter(p => p.path),
-  );
+].concat((item.children || []).map(MapRoute(catalog.concat(item.title)))
+  .reduce((p, c) => p.concat(c), [])
+  .filter(p => p.path));
 
 
 export const menus = datas.map(MapMenu);
 export const routes = datas.map(MapRoute())
-                          .reduce((p, c) => p.concat(c), [])
-                          .filter(p => p.path);
+  .reduce((p, c) => p.concat(c), [])
+  .filter(p => p.path);

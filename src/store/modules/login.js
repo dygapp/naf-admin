@@ -1,5 +1,5 @@
-import auth from '~/api/auth';
-import * as types from '~/store/mutation-types';
+import auth from '@/api/auth';
+import * as types from '@/store/mutation-types';
 
 // initial state
 // shape: [{ id, quantity }]
@@ -16,7 +16,7 @@ const getters = {
 
 // actions
 const actions = {
-  async login({ commit, dispatch, state }, { username, password }) {
+  async login({ commit, dispatch/* , state */ }, { username, password }) {
     commit(types.SHOW_LOADING);
     try {
       let res = await auth.login({ username, password });
@@ -36,7 +36,7 @@ const actions = {
       commit(types.HIDE_LOADING);
     }
   },
-  async fetch({ commit, state }, { username }) {
+  async fetch({ commit/* , state */ }, { username }) {
     const res = await auth.fetch({ username });
     const { userinfo } = res;
     commit(types.USER_INFO, userinfo);

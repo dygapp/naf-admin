@@ -41,9 +41,7 @@ export default {
   },
   mounted() {
     for (let i = 6; i > -1; i -= 1) {
-      const date = moment(new Date().getTime() - (86400000 * i)).format(
-        'YYYY-MM-DD',
-      );
+      const date = moment(new Date().getTime() - (86400000 * i)).format('YYYY-MM-DD');
       this.sevenDay.push(date);
     }
     this.getSevenData();

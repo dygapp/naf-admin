@@ -33,7 +33,9 @@ import { createNamespacedHelpers } from 'vuex';
 import config from '@/utils/config';
 import MyFooter from './footer';
 
-const { productName, description, copyright, layout } = config;
+const {
+  productName, description, copyright, layout
+} = config;
 
 const { /* mapState, */ mapActions } = createNamespacedHelpers('login');
 
@@ -124,7 +126,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "~style/theme.less";
+@import "~style/theme";
 
 .container {
   background: #f0f2f5;

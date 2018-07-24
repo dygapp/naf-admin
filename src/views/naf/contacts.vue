@@ -125,10 +125,10 @@ export default {
     handleNavClick(data) {
       console.log(data);
     },
-    showNavMenu(data) {
+    showNavMenu() {
       this.$message('click me');
     },
-    renderNavNode(h, { node, data, store }) {
+    renderNavNode(h, { node, data/* , store */ }) {
       const clickHandler = (e) => {
         console.log(data);
         e.stopPropagation();

@@ -1,5 +1,5 @@
-import api from '~/api/contacts';
-import * as types from '~/store/mutation-types';
+import api from '@/api/contacts';
+import * as types from '@/store/mutation-types';
 
 // initial state
 // shape: [{ id, quantity }]
