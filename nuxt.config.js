@@ -21,13 +21,26 @@ module.exports = {
   */
   loading: { color: '#3B8070' },
   /*
+  ** Global CSS
+  */
+  css: [
+    'element-ui/lib/theme-chalk/index.css'
+  ],
+
+  /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [
+    '@/plugins/element-ui'
+  ],
+  /*
   ** Build configuration
   */
   build: {
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',

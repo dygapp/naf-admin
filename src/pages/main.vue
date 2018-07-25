@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Layout from '~/components/frame/main-layout';
+import Layout from '@/components/frame/main-layout';
 
 export default {
   components: {
