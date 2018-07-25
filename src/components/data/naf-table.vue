@@ -40,8 +40,8 @@ export default {
   data() {
     return {
       loading: false,
-      dataSource: [],
-      total: 0,
+      // dataSource: [],
+      // total: 0,
       page: 1,
       size: 20,
       fieldName: '',
