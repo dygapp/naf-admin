@@ -5,8 +5,7 @@ const resolve = (dir) => {
 }
 
 module.exports = {
-  // mode: 'universal',
-  mode: 'spa',
+  // mode: 'spa',
   srcDir: 'src',
   /*
   ** Headers of the page
