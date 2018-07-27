@@ -1,5 +1,6 @@
 
-import pages from '@/views';
+// import pages from '@/views';
+const pages = [];
 
 const datas = [
   {

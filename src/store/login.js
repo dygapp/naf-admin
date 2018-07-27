@@ -1,21 +1,21 @@
 import auth from '@/api/auth';
-import * as types from '@/store/mutation-types';
+import * as types from '@/constants/mutation-types';
 
 // initial state
 // shape: [{ id, quantity }]
-const _state = {
+export const state = () => ({
   loading: false,
   authorized: true,
   userinfo: null,
-};
+});
 
 // getters
-const getters = {
+export const getters = {
   userStatus: state => (state.userinfo || {}).status,
 };
 
 // actions
-const actions = {
+export const actions = {
   async login({ commit, dispatch/* , state */ }, { username, password }) {
     commit(types.SHOW_LOADING);
     try {
@@ -45,7 +45,7 @@ const actions = {
 };
 
 // mutations
-const mutations = {
+export const mutations = {
   [types.SHOW_LOADING](state) {
     state.loading = true;
   },
@@ -63,12 +63,4 @@ const mutations = {
   [types.USER_INFO](state, payload) {
     state.userinfo = payload;
   },
-};
-
-export default {
-  namespaced: true,
-  state: _state,
-  getters,
-  actions,
-  mutations,
 };

@@ -1,19 +1,12 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import * as actions from './actions';
-import * as getters from './getters';
-import login from './modules/login';
 
-Vue.use(Vuex);
+export const state = () => ({
+  isAuthoriezd: false
+})
 
-const debug = process.env.NODE_ENV !== 'production';
+export const mutations = {
+}
 
-export default new Vuex.Store({
-  namespaced: true,
-  actions,
-  getters,
-  modules: {
-    login,
-  },
-  strict: debug,
-});
+export const getters = {
+  logined: state => state.login.authorized,
+  userinfo: state => state.login.userinfo
+}

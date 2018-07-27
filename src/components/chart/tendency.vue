@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style lang="less">
-@import '~style/mixin';
+@import '~@/style/mixin';
 .line1 {
   display: flex;
   justify-content: center;

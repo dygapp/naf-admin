@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style lang="less">
-@import "~style/mixin";
+@import "~@/style/mixin";
 
 .data_section {
   padding: 20px;

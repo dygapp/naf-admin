@@ -1,3 +1,9 @@
+const path = require("path");
+
+const resolve = (dir) => {
+  return path.join(__dirname, '..', dir)
+}
+
 module.exports = {
   // mode: 'universal',
   mode: 'spa',
@@ -13,7 +19,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: '/naf-icons/iconfont.css' }
     ]
   },
   /*
@@ -24,7 +31,8 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    { src: '~/style/index.less', lang: 'less' }
   ],
 
   /*
@@ -34,10 +42,37 @@ module.exports = {
     '@/plugins/element-ui'
   ],
   /*
-  ** Build configuration
+  ** Nuxt.js modules
   */
+  modules: [
+    // Doc: https://github.com/nuxt-community/axios-module#usage
+    '@nuxtjs/axios'
+  ],
+  /*
+  ** Axios module configuration
+  */
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+  },
+  loader: [
+    {
+      test: /\.less$/,
+      loaders: 'style-loader!css-loader!less-loader'
+    }
+  ],
+  /*
+    ** Build configuration
+    */
   build: {
-    /*
+    vendor:['axios', 'element-ui'],
+    babel:{
+        "plugins":[
+            ['component',{
+                "libraryName":"element-ui",
+                "styleLibraryName":"theme-chalk"
+            }]
+        ]
+    },    /*
     ** Run ESLint on save
     */
     extend(config, { isDev, isClient }) {
@@ -49,6 +84,11 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+      // // 设置别名
+      // config.resolve.alias = {
+      //   ...(config.resolve.alias||{}),
+      //   '@': resolve('src'),
+      // }
     }
   }
 }

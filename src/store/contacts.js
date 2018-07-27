@@ -1,15 +1,15 @@
 import api from '@/api/contacts';
-import * as types from '@/store/mutation-types';
+import * as types from '@/constants/mutation-types';
 
 // initial state
 // shape: [{ id, quantity }]
-const _state = {
+export const state = () => ({
   items: [],
   current: null,
-};
+});
 
 // actions
-const actions = {
+export const actions = {
   async create({ commit }, payload) {
     try {
       const res = await api.create(payload);
@@ -40,18 +40,11 @@ const actions = {
 };
 
 // mutations
-const mutations = {
+export const mutations = {
   [types.APPS_LOADED](state, payload) {
     state.items = payload;
   },
   [types.APPS_SELECTED](state, payload) {
     state.current = payload;
   },
-};
-
-export default {
-  namespaced: true,
-  state: _state,
-  actions,
-  mutations,
 };
