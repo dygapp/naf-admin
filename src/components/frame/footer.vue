@@ -2,7 +2,7 @@
   <span> {{copyright}}</span>
 </template>
 <script>
-import config from '@/utils/config';
+import config from '@/config';
 
 export default {
   data() {

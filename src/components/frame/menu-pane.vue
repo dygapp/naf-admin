@@ -7,7 +7,7 @@
   </el-menu>
 </template>
 <script>
-import { menus } from '@/utils/menus';
+import { menus } from '@/config/menus';
 import NafMenuItem from './menu-item';
 
 export default {

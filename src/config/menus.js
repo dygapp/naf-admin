@@ -5,138 +5,86 @@ const pages = [];
 const datas = [
   {
     title: '系统管理',
+    path: '/system',
     icon: 'system',
     children: [
       {
         title: '通讯录',
         path: '/system/contacts',
-        page: 'naf.contacts',
         icon: 'account ',
       },
       {
         title: '用户管理',
         path: '/system/user',
-        page: 'naf.user',
         icon: 'account',
       },
       {
         title: '部门管理',
         path: '/system/dept',
-        page: 'naf.dept',
         icon: 'dept',
       },
       {
         title: '标签管理',
         path: '/system/tag',
-        page: 'naf.tag',
         icon: 'tag',
       },
       {
         title: '字典管理',
         path: '/system/dict',
-        page: 'naf.dict',
         icon: 'dict',
       },
       {
         title: '证书管理',
         path: '/system/cert',
-        page: 'naf.cert',
         icon: 'cert',
       },
       {
         title: '分站管理',
         path: '/system/site',
-        page: 'sys.site',
         icon: 'site',
       },
       {
         title: '操作日志',
-        icon: 'log',
         path: '/system/log',
-        page: 'naf.log',
+        icon: 'log',
       },
     ],
   },
-  // {
-  //   title: '公文管理',
-  //   icon: 'doc',
-  //   children: [
-  //     {
-  //       title: '内部发文',
-  //       path: '/doc/send',
-  //       page: 'doc.send',
-  //       icon: 'doc3',
-  //     },
-  //     {
-  //       title: '外部发文',
-  //       path: '/doc/send',
-  //       page: 'doc.send',
-  //       icon: 'doc1',
-  //     },
-  //     {
-  //       title: '内部收文',
-  //       path: '/doc/send',
-  //       page: 'doc.send',
-  //       icon: 'doc4',
-  //     },
-  //     {
-  //       title: '外部收文',
-  //       path: '/doc/send',
-  //       page: 'doc.send',
-  //       icon: 'doc2',
-  //     },
-  //     {
-  //       title: '回执管理',
-  //       path: '/doc/receipt',
-  //       page: 'doc.receipt',
-  //       icon: 'receipt',
-  //     },
-  //     {
-  //       title: '通知管理',
-  //       path: '/doc/notice',
-  //       page: 'doc.notice',
-  //       icon: 'comments',
-  //     },
-  //   ],
-  // },
   {
     title: '企业管理',
+    path: '/corp',
     icon: 'corp',
     children: [
       {
         title: '注册审核',
         path: '/corp/check',
-        page: 'corp.check',
         icon: 'shenhe',
       },
       {
         title: '信息认证',
         path: '/corp/info',
-        page: 'corp.info',
         icon: 'renzheng',
       },
       {
         title: '积分体系',
         path: '/corp/points',
-        page: 'corp.points',
         icon: 'jifen',
       },
       {
         title: '企业用户',
         path: '/corp/user',
-        page: 'corp.user',
         icon: 'corpuser',
       },
     ],
   },
   {
     title: '招聘管理',
+    path: '/job',
     icon: 'job',
     children: [
       {
         title: '招聘信息',
         path: '/job/info',
-        page: 'job.info',
         icon: 'info',
       },
       {
@@ -148,31 +96,28 @@ const datas = [
       {
         title: '校园宣讲会',
         path: '/job/talk',
-        page: 'job.talk',
         icon: 'info',
       },
     ],
   },
   {
     title: '信息发布',
+    path: '/cms',
     icon: 'news',
     children: [
       {
         title: '通知公告',
         path: '/cms/notice',
-        page: 'cms.notice',
         icon: 'column',
       },
       {
         title: '政策法规',
         path: '/cms/policy',
-        page: 'cms.policy',
         icon: 'column',
       },
       {
         title: '新闻栏目',
         path: '/cms/news',
-        page: 'cms.news',
         icon: 'column',
       },
     ],
@@ -214,30 +159,6 @@ const datas = [
       },
     ],
   },
-  // {
-  //   title: '错误页',
-  //   icon: 'menu',
-  //   children: [
-  //     {
-  //       title: '403',
-  //       icon: 'menu',
-  //       path: '/page403',
-  //       page: pages.Error403,
-  //     },
-  //     {
-  //       title: '404',
-  //       icon: 'menu',
-  //       path: '/page404',
-  //       page: pages.Error404,
-  //     },
-  //     {
-  //       title: '500',
-  //       icon: 'menu',
-  //       path: '/page500',
-  //       page: pages.Error500,
-  //     },
-  //   ],
-  // },
 ];
 
 const MapMenu = item => ({
