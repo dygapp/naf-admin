@@ -30,7 +30,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-import config from '@/utils/config';
+import config from '@/config';
 import MyFooter from '@/components/frame/footer';
 
 const {

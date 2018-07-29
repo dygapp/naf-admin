@@ -26,7 +26,7 @@
   </el-container>
 </template>
 <script>
-import config from '@/utils/config';
+import config from '@/config';
 import NafHeader from '@/components/frame/header';
 import NafFooter from '@/components/frame/footer';
 import NafMenu from '@/components/frame/menu-pane';
