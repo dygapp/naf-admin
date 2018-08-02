@@ -5,7 +5,7 @@ import * as types from '@/constants/mutation-types';
 // shape: [{ id, quantity }]
 export const state = () => ({
   loading: false,
-  authorized: true,
+  isAuthenticated: true,
   userinfo: null,
 });
 
@@ -54,10 +54,10 @@ export const mutations = {
   },
 
   [types.LOGIN_SUCCESS](state) {
-    state.authorized = true;
+    state.isAuthenticated = true;
   },
   [types.LOGIN_FAILURE](state) {
-    state.authorized = false;
+    state.isAuthenticated = false;
   },
 
   [types.USER_INFO](state, payload) {

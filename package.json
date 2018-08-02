@@ -13,15 +13,16 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.0.0",
+    "@nuxtjs/axios": "^5.3.1",
     "echarts": "^4.1.0",
-    "element-ui": "^2.4.4",
+    "element-ui": "^2.4.5",
     "moment": "^2.22.2",
-    "nuxt": "^1.4.1"
+    "nuxt": "^1.4.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-plugin-component": "^1.1.1",
+    "babel-polyfill": "^6.26.0",
     "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-friendly-formatter": "^4.0.1",

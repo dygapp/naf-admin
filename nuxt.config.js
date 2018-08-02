@@ -1,7 +1,12 @@
 const path = require("path");
+const menus = require('./src/config/menus').routes;
 
 const resolve = (dir) => {
   return path.join(__dirname, '..', dir)
+}
+const RouteMeta = (path) => {
+  const menu = menus.find(p=>p.path==path);
+  return (menu && menu.meta) || {};
 }
 
 module.exports = {
@@ -12,6 +17,7 @@ module.exports = {
   */
   head: {
     title: '智慧就业',
+    // titleTemplate: '%s - 智慧就业',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -45,7 +51,8 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    // '~/modules/router-meta'
   ],
   /*
   ** Axios module configuration
@@ -63,7 +70,7 @@ module.exports = {
     ** Build configuration
     */
   build: {
-    vendor:['axios', 'element-ui'],
+    vendor:['axios', 'element-ui', 'babel-polyfill'],
     babel:{
         "plugins":[
             ['component',{
@@ -74,8 +81,8 @@ module.exports = {
     },    /*
     ** Run ESLint on save
     */
-    extend(config, { isDev, isClient }) {
-      if (isDev && isClient) {
+    extend(config, { isDev }) {
+      if (isDev && process.client) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -89,5 +96,16 @@ module.exports = {
       //   '@': resolve('src'),
       // }
     }
-  }
+  },
+  router: {
+    routes: [
+      { path: '/system/contacts', meta: {mymeta: 'hello,meta'}}
+    ]
+    // middleware: ['meta'],
+    // extendRoutes (routes, resolve) {
+    //   let ret= routes.map(p=>({...p, meta: RouteMeta(p.path)}));
+    //   console.log(ret);
+    //   return ret;
+    // }
+  }  
 }

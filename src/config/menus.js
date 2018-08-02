@@ -84,18 +84,18 @@ const datas = [
     children: [
       {
         title: '招聘信息',
-        path: '/job/info',
+        path: '/job/job-info',
         icon: 'info',
       },
       {
         title: '招聘会',
-        path: '/job/fair',
+        path: '/job/job-fair',
         page: 'job.fair',
         icon: 'info',
       },
       {
         title: '校园宣讲会',
-        path: '/job/talk',
+        path: '/job/campus-talk',
         icon: 'info',
       },
     ],
@@ -208,7 +208,7 @@ const MapRoute = (catalog = []) => item => [{
   .filter(p => p.path));
 
 
-export const menus = datas.map(MapMenu);
-export const routes = datas.map(MapRoute())
+exports.menus = datas.map(MapMenu);
+exports.routes = datas.map(MapRoute())
   .reduce((p, c) => p.concat(c), [])
   .filter(p => p.path);

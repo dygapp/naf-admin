@@ -42,6 +42,7 @@ const defaultConfig = {
 
 const { layout = {} } = config;
 export default {
+  middleware: 'auth',
   components: {
     NafHeader,
     NafFooter,

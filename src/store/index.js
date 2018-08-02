@@ -7,6 +7,6 @@ export const mutations = {
 }
 
 export const getters = {
-  logined: state => state.login.authorized,
+  isAuthenticated: state => state.login.isAuthenticated,
   userinfo: state => state.login.userinfo
 }

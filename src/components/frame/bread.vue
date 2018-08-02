@@ -5,10 +5,18 @@
   </el-breadcrumb>
 </template>
 <script>
+import { routes }  from '@/config/menus';
+
+const RouteMeta = (path) => {
+  const menu = routes.find(p=>p.path==path);
+  return (menu && menu.meta) || {};
+}
 export default {
   computed: {
     catalog() {
-      return this.$route.meta.catalog;
+      console.log(this.$route)
+      // return this.$route.meta.catalog;
+      return RouteMeta(this.$route.path).catalog;
     },
   },
 };
