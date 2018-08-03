@@ -17,7 +17,7 @@
     "echarts": "^4.1.0",
     "element-ui": "^2.4.5",
     "moment": "^2.22.2",
-    "nuxt": "^1.4.2"
+    "nuxt-edge": "^2.0.0-25552561.fceb30b"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
