@@ -14,7 +14,7 @@ const RouteMeta = (path) => {
 export default {
   computed: {
     catalog() {
-      console.log(this.$route)
+      // console.log(this.$route)
       // return this.$route.meta.catalog;
       return RouteMeta(this.$route.path).catalog;
     },

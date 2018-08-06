@@ -17,13 +17,13 @@
     "echarts": "^4.1.0",
     "element-ui": "^2.4.5",
     "moment": "^2.22.2",
-    "nuxt-edge": "^2.0.0-25552561.fceb30b"
+    "nuxt-edge": "^2.0.0-25558577.3f1d634"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-plugin-component": "^1.1.1",
     "babel-polyfill": "^6.26.0",
-    "eslint": "^5.2.0",
+    "eslint": "^5.3.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.0",
