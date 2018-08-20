@@ -1,11 +1,10 @@
-import auth from '@/api/auth';
+// import auth from '@/api/auth';
 import * as types from '@/constants/mutation-types';
-
 // initial state
 // shape: [{ id, quantity }]
 export const state = () => ({
   loading: false,
-  isAuthenticated: true,
+  isAuthenticated: false,
   userinfo: null,
 });
 
@@ -19,12 +18,14 @@ export const actions = {
   async login({ commit, dispatch/* , state */ }, { username, password }) {
     commit(types.SHOW_LOADING);
     try {
-      let res = await auth.login({ username, password });
+      // console.log(this.$axios);
+      //let res = await auth.login({ username, password });
+      let res = await this.$axios.$post('/api/login', {username, password})
       console.log(res);
       if (res.errcode && res.errcode !== 0) {
         commit(types.LOGIN_FAILURE);
       } else {
-        res = await dispatch('fetch', { username });
+        await dispatch('fetch', { username });
         commit(types.LOGIN_SUCCESS);
       }
       return res;
@@ -37,9 +38,18 @@ export const actions = {
     }
   },
   async fetch({ commit/* , state */ }, { username }) {
-    const res = await auth.fetch({ username });
+    // const res = await auth.fetch({ username });
+    const res = await this.$axios.$get('/api/userinfo', { username })
     const { userinfo } = res;
     commit(types.USER_INFO, userinfo);
+    return res;
+  },
+  async logout({ commit }) {
+    // const res = await auth.fetch({ username });
+    const res = await this.$axios.$post('/api/logout')
+    if (res.errcode && res.errcode === 0) {
+      commit(types.LOGOUT_SUCCESS);
+    }
     return res;
   },
 };
@@ -58,6 +68,10 @@ export const mutations = {
   },
   [types.LOGIN_FAILURE](state) {
     state.isAuthenticated = false;
+  },
+  [types.LOGOUT_SUCCESS](state) {
+    state.isAuthenticated = false;
+    state.userinfo = null;
   },
 
   [types.USER_INFO](state, payload) {

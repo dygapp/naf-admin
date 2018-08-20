@@ -1,25 +1,26 @@
 <template>
   <el-container class="layout" direction="vertical">
     <el-header class="header" :height="layout.headerHeight" :style="{lineHeight: layout.headerHeight}">
-      <naf-header :logo-width="asideWidth" :short-name="name" 
-        :menu-collapse="menuCollapse" @toggle-menu="toggleMenu">
+      <naf-header :logo-width="asideWidth" :short-name="name" :menu-collapse="menuCollapse" @toggle-menu="toggleMenu">
       </naf-header>
     </el-header>
-    <el-container class="main">
-      <el-aside :width="asideWidth" class="sider">
-        <naf-menu theme="light" :is-collapse="menuCollapse"></naf-menu>
-      </el-aside>
-      <el-main class="content">
-        <div class="bread" :height="layout.breadHeight">
-          <naf-bread></naf-bread>
-        </div>
-        <div class="page">
-          <transition>
-            <nuxt />
-          </transition>
-        </div>
-      </el-main>
-    </el-container>
+    <el-main style="padding: 0;display: flex;">
+      <el-container class="main">
+        <el-aside :width="asideWidth" class="sider">
+          <naf-menu theme="light" :is-collapse="menuCollapse"></naf-menu>
+        </el-aside>
+        <el-main class="content">
+          <div class="bread" :height="layout.breadHeight">
+            <naf-bread></naf-bread>
+          </div>
+          <div class="page">
+            <transition>
+              <nuxt />
+            </transition>
+          </div>
+        </el-main>
+      </el-container>
+    </el-main>
     <el-footer class="footer" height="layout.footerHeight">
       <naf-footer></naf-footer>
     </el-footer>
@@ -27,10 +28,10 @@
 </template>
 <script>
 import config from '@/config';
-import NafHeader from '@/components/frame/header';
-import NafFooter from '@/components/frame/footer';
-import NafMenu from '@/components/frame/menu-pane';
-import NafBread from '@/components/frame/bread';
+import NafHeader from '@/frame/header';
+import NafFooter from '@/frame/footer';
+import NafMenu from '@/frame/menu-pane';
+import NafBread from '@/frame/bread';
 
 const defaultConfig = {
   breadHeight: '24px',
@@ -59,7 +60,7 @@ export default {
   methods: {
     toggleMenu() {
       this.menuCollapse = !this.menuCollapse;
-    }
+    },
   },
   computed: {
     asideWidth() {
@@ -88,8 +89,9 @@ export default {
       height: 100%;
     }
   }
-  .main {// FOR EDGE
-    overflow: hidden;  
+  .main {
+    // FOR EDGE
+    overflow: hidden;
   }
   .content {
     display: flex;
@@ -113,8 +115,9 @@ export default {
 }
 </style>
 <style>
-  #__nuxt, #__layout {
-    width: 100%;
-    height: 100%;
-  }
+#__nuxt,
+#__layout {
+  width: 100%;
+  height: 100%;
+}
 </style>

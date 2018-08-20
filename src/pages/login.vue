@@ -1,41 +1,33 @@
 <template>
-  	<div style="height:100%;overflow:auto;">
-	  	<transition name="form-fade" mode="in-out">
-	  		<div class="container" v-show="showLogin">
-          <div class="top">
-            <div class="header">
-              <img alt="" class="logo" src="~/assets/logo.svg" />
-              <span class="title">{{productName}}</span>
-            </div>
-            <p class="desc">{{description}}</p>
-          </div>
-		    	<el-form class="main" :model="loginForm" :rules="rules" ref="loginForm">
-						<el-form-item prop="username">
-							<el-input v-model="loginForm.username" placeholder="用户名" prefix-icon="naf-icons naf-icon-user"><span>dsfsf</span></el-input>
-						</el-form-item>
-						<el-form-item prop="password">
-							<el-input type="password" placeholder="密码" v-model="loginForm.password" prefix-icon="naf-icons naf-icon-password"></el-input>
-						</el-form-item>
-						<el-form-item>
-								<el-button type="primary" @click="submitForm('loginForm')" :style="{width: '100%'}">登录</el-button>
-							</el-form-item>
-					</el-form>
-	  		</div>
-	  	</transition>
-			<el-footer class="footer" height="layout.footerHeight">
-				<my-footer></my-footer>
-			</el-footer>
-  	</div>
+  <div class="container" v-show="showLogin">
+    <div class="top">
+      <div class="header">
+        <img alt="" class="logo" src="~/assets/logo.svg" />
+        <span class="title">{{productName}}</span>
+      </div>
+      <p class="desc">{{description}}</p>
+    </div>
+    <el-form class="main" :model="loginForm" :rules="rules" ref="loginForm">
+      <el-form-item prop="username">
+        <el-input v-model="loginForm.username" placeholder="用户名" prefix-icon="naf-icons naf-icon-user">
+          <span>dsfsf</span>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input type="password" placeholder="密码" v-model="loginForm.password" prefix-icon="naf-icons naf-icon-password"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('loginForm')" :style="{width: '100%'}">登录</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
 import config from '@/config';
-import MyFooter from '@/components/frame/footer';
 
-const {
-  productName, description, copyright, layout
-} = config;
+const { productName, description } = config;
 
 const { /* mapState, */ mapActions } = createNamespacedHelpers('login');
 
@@ -43,24 +35,21 @@ const { /* mapState, */ mapActions } = createNamespacedHelpers('login');
 // import {mapActions, mapState} from 'vuex'
 export default {
   layout: 'login',
-  components: {
-    MyFooter,
-  },
   data() {
     return {
       loginForm: {
         username: '',
-        password: '',
+        password: ''
       },
       rules: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
       showLogin: false,
       productName,
       description,
-      copyright,
-      layout,
     };
   },
   mounted() {
@@ -80,38 +69,38 @@ export default {
       //   type: "success",
       //   message: "登录成功"
       // });
-      this.$refs[formName].validate(async (valid) => {
+      this.$refs[formName].validate(async valid => {
         if (valid) {
           const res = await this.login({
             username: this.loginForm.username || 'admin',
-            password: this.loginForm.password,
+            password: this.loginForm.password
           });
-          console.log(res);
+          // console.log(res);
           if (res.errcode === 0) {
             this.$message({
               type: 'success',
               message: '登录成功',
-              duration: 1000,
+              duration: 1000
             });
             this.$router.push(this.$route.query.redirect || '/');
           } else {
             this.$message({
               type: 'error',
-              message: res.message,
+              message: res.message
             });
           }
         } else {
           this.$notify.error({
             title: '错误',
             message: '请输入正确的用户名密码',
-            offset: 100,
+            offset: 100
           });
           return false;
         }
         return true;
       });
-    },
-  },
+    }
+  }
   // watch: {
   // 	adminInfo: function (newValue){
   // 		if (newValue.id) {
@@ -127,11 +116,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "../style/theme";
+@import '../style/theme';
 
 .container {
   background: #f0f2f5;
-  background-image: url("~assets/bg.svg");
+  background-image: url('~assets/bg.svg');
   width: 100%;
   min-height: 100%;
   background-repeat: no-repeat;
@@ -165,7 +154,7 @@ export default {
 .title {
   font-size: 33px;
   color: @heading-color;
-  font-family: "Myriad Pro", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: 600;
   position: relative;
   top: 2px;
@@ -178,16 +167,4 @@ export default {
   margin-bottom: 40px;
 }
 
-.footer {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  text-align: center;
-  height: 48px;
-}
-
-.copyright {
-  color: @text-color-secondary;
-  font-size: @font-size-base;
-}
 </style>

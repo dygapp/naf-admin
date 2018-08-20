@@ -3,7 +3,7 @@ import Vue from 'vue'
 var vm = new Vue({})
 
 export default function ({ $axios, redirect }) {
-  $axios.onRequest(config => {
+  $axios.onRequest( config => {
     if (process.browser) {
         vm.$loading()
     }
@@ -20,6 +20,8 @@ export default function ({ $axios, redirect }) {
     const code = parseInt(error.response && error.response.status)
     if (code === 400) {
       redirect('/400')
+    } else if (code === 403) {
+      redirect('/login')
     }
   })
 }

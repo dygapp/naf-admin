@@ -27,12 +27,13 @@ module.exports = {
       ignorePropertyModificationsFor: [
         'state', // for vuex state
         'acc', // for reduce accumulators
+        'req', // for server request 
         'e' // for e.returnvalue
       ]
     }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-unused-vars': ["warn", { "vars": "local", "varsIgnorePattern": "^_" }],
+    'no-unused-vars': ["warn", { "vars": "local", "varsIgnorePattern": "^_", "args": "none"}],
     'no-console': 'off',
     'no-underscore-dangle': 'off',
     'no-tabs': 'off',

@@ -8,10 +8,10 @@
       </div>
       <div class="banner">
         <i class="naf-icons" :class="{'naf-icon-unfold': menuCollapse, 'naf-icon-fold': !menuCollapse,}" @click="toggleMenu"></i>
-        <el-dropdown class="right">
+        <el-dropdown class="right" @command="handleUserCommand">
           <span class="el-dropdown-link">
             <i class="naf-icons naf-icon-avatar"></i>
-            <span class="name">管理員</span>
+            <span class="name">{{userinfo && userinfo.fullname || '管理員'}}</span>
           </span>
           <el-dropdown-menu class="action-menu" slot="dropdown">
             <el-dropdown-item>
@@ -19,15 +19,21 @@
               <span>个人中心</span>
             </el-dropdown-item>
             <el-dropdown-item>
-              <i class="naf-icons naf-icon-setting"></i>设置</el-dropdown-item>
-            <el-dropdown-item divided>
-              <i class="naf-icons naf-icon-quit"></i>退出</el-dropdown-item>
+              <i class="naf-icons naf-icon-setting"></i>
+              <span>设置</span>
+            </el-dropdown-item>
+            <el-dropdown-item command="logout" divided>
+              <i class="naf-icons naf-icon-quit"></i>
+              <span>退出</span>
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
   </div>    
 </template>
 <script>
+import { mapActions, mapState } from 'vuex';
+
 export default {
   props: {
     shortName: String,
@@ -38,10 +44,41 @@ export default {
     menuCollapse: Boolean,
   },
   methods: {
+    ...mapActions({
+      logout: 'login/logout',
+    }),
     toggleMenu() {
       this.$emit('toggle-menu');
     },
+    async handleUserCommand(command) {
+      if(command === 'logout') {
+        await this.handleLogout();
+      } else {
+        this.$message({
+          type: 'info',
+          message: '即将上线，敬请期待...',
+        });
+      }
+    },
+    async handleLogout() {
+      console.log(this.userinfo);
+      console.log(this);
+      const res = await this.logout();
+      // console.log(res);
+      if (res.errcode === 0) {
+        this.$router.push(this.$route.query.redirect || '/login');
+      } else {
+        console.log(res);
+        this.$message({
+          type: 'error',
+          message: res.message,
+        });
+      }
+    }
   },
+  computed: mapState({
+    userinfo: state=>state.login.userinfo,
+  })  
 };
 </script>
 <style lang="less" scoped>
