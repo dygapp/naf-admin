@@ -208,7 +208,7 @@ const MapRoute = (catalog = []) => item => [{
   .filter(p => p.path));
 
 
-exports.menus = datas.map(MapMenu);
-exports.routes = datas.map(MapRoute())
+export const menus = datas.map(MapMenu);
+export const routes = datas.map(MapRoute())
   .reduce((p, c) => p.concat(c), [])
   .filter(p => p.path);
