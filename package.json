@@ -8,7 +8,7 @@
     "dev_bak": "nuxt",
     "dev": "node server/express.js",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "cross-env NODE_ENV=production node server/express.js",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue src",
     "precommit": "npm run lint"
@@ -21,12 +21,13 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "moment": "^2.22.2",
-    "nuxt-edge": "^2.0.0-25579690.716c04f"
+    "nuxt-edge": "latest"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-plugin-component": "^1.1.1",
     "babel-polyfill": "^6.26.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.4.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-friendly-formatter": "^4.0.1",
