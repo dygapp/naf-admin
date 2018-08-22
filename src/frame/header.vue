@@ -8,7 +8,8 @@
       </div>
       <div class="banner">
         <i class="naf-icons" :class="{'naf-icon-unfold': menuCollapse, 'naf-icon-fold': !menuCollapse,}" @click="toggleMenu"></i>
-        <el-dropdown class="right" @command="handleUserCommand">
+        <!--下拉用户菜单-->
+        <el-dropdown class="right" @command="handleUserCommand" v-if="false">
           <span class="el-dropdown-link">
             <i class="naf-icons naf-icon-avatar"></i>
             <span class="name">{{userinfo && userinfo.fullname || '管理員'}}</span>
@@ -28,6 +29,12 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+        <!--简洁用户菜单-->
+        <div class="right lite">
+            <span class="name">{{userinfo && userinfo.fullname || '管理員'}}</span>
+            <span>|</span>
+            <el-button type="text" @click="handleLogout">退出</el-button>
+        </div>
       </div>
   </div>    
 </template>
@@ -116,6 +123,12 @@ export default {
         background: grey;
         padding: 4px;
       }
+      .right.lite{
+        font-size: 14px;
+      }
     }
+  }
+  .el-button--text{
+    color: white;
   }
 </style>
