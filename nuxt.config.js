@@ -111,5 +111,9 @@ module.exports = {
     //   console.log(ret);
     //   return ret;
     // }
-  }  
+  },  
+  serverMiddleware: [
+    // API middleware
+    './server/index.js'
+  ]
 }

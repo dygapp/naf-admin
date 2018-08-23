@@ -1,3 +1,6 @@
+/**
+ * express集成nuxt
+ */
 const { Nuxt, Builder } = require('nuxt-edge')
 const bodyParser = require('body-parser')
 const session = require('express-session')
@@ -10,31 +13,31 @@ app.use(bodyParser.json())
 // Sessions to create `req.session`
 app.use(session({
   secret: 'super-secret-key',
-  resave: false,
+  resave: true,
   saveUninitialized: false,
-  cookie: { maxAge: 1200000 }
+  cookie: { maxAge: 600000 }
 }))
 
 // POST `/api/login` to log in the user and add him to the `req.session.authUser`
 app.post('/api/login', function (req, res) {
   if (req.body.username === 'admin' && req.body.password === '111111') {
     req.session.authUser = { username: 'admin', fullname: '系统管理员' }
-    return res.json({ errcode: 0, message: 'ok', username: 'admin' })
+    return res.json({ errcode: 0, errmsg: 'ok', username: 'admin' })
   }
-  res.json({ errcode: -1, message: 'Bad credentials' })
+  res.json({ errcode: -1, errmsg: '用户名或者密码错误' })
 })
 
 // POST `/api/logout` to log out the user and remove it from the `req.session`
 app.post('/api/logout', function (req, res) {
   delete req.session.authUser
-  res.json({ errcode: 0, message: 'ok' })
+  res.json({ errcode: 0, errmsg: 'ok' })
 })
 
 app.get('/api/userinfo', function (req, res) {
   if (req.session && req.session.authUser) {
-    return res.json({ errcode: 0, message: 'ok', userinfo: req.session.authUser })
+    return res.json({ errcode: 0, errmsg: 'ok', userinfo: req.session.authUser })
   }
-  res.json({ errcode: -1, message: 'Not login' })
+  res.json({ errcode: -1, errmsg: 'Not login' })
 })
 
 // We instantiate Nuxt.js with the options
