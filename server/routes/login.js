@@ -9,7 +9,7 @@ const users = [
 ]
 
 /* GET users listing. */
-router.post('/login', function (req, res, next) {
+router.post('/api/login', function (req, res, next) {
   let user = users.find(p=>p.username === req.body.username);
   if (user && req.body.password === user.password) {
     req.session.authUser = user;
@@ -19,12 +19,12 @@ router.post('/login', function (req, res, next) {
 })
 
 /* GET user by ID. */
-router.post('/logout', function (req, res, next) {
+router.post('/api/logout', function (req, res, next) {
   delete req.session.authUser
   res.json({ errcode: 0, errmsg: 'ok' })
 })
 
-router.get('/userinfo', function (req, res) {
+router.get('/api/userinfo', function (req, res) {
   if (req.session && req.session.authUser) {
     return res.json({ errcode: 0, errmsg: 'ok', userinfo: req.session.authUser })
   }

@@ -8,11 +8,11 @@ const datas = [
     path: '/system',
     icon: 'system',
     children: [
-      {
+      /*{
         title: '通讯录',
         path: '/system/contacts',
         icon: 'account ',
-      },
+      },*/
       {
         title: '用户管理',
         path: '/system/user',

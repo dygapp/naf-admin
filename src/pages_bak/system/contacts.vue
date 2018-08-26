@@ -18,16 +18,16 @@
         <span>部门名称</span>
         <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
       </div>
-      <demo-table :fields="fields" :filters="filters"></demo-table>
+      <user-table :fields="fields" :filters="filters"></user-table>
     </el-card>
   </div>
 </template>
 <script>
-import DemoTable from '@/components/data/demo-table';
+import UserTable from '@/components/contacts/user-table';
 
 export default {
   components: {
-    DemoTable,
+    UserTable,
   },
   data() {
     return {

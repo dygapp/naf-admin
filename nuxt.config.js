@@ -37,7 +37,8 @@ module.exports = {
   */
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    { src: '~/style/index.less', lang: 'less' }
+    { src: '~/style/index.less', lang: 'less' },
+    { src: '~/style/common.less', lang: 'less' }
   ],
 
   /*

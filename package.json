@@ -5,11 +5,11 @@
   "author": "dygapp <dygapp@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev2": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt build && nuxt start",
-    "dev2": "node server/express.js",
-    "start2": "cross-env NODE_ENV=production node server/express.js",
+    "start2": "nuxt build && nuxt start",
+    "dev": "node server/express.js",
+    "start": "cross-env NODE_ENV=production node server/express.js",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue src",
     "precommit": "npm run lint"
