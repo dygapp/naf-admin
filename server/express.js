@@ -23,8 +23,8 @@ const login = require('./routes/login')
 const dept = require('./routes/dept')
 
 // Import API Routes
-app.use(login)
-app.use(dept)
+app.use('/smart/', login)
+app.use('/smart/', dept)
 
 // We instantiate Nuxt.js with the options
 config.isProd = process.env.NODE_ENV === 'production';
