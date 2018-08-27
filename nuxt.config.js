@@ -72,9 +72,10 @@ module.exports = {
     }
   ],
   /*
-    ** Build configuration
+    ** Build configuration 
     */
   build: {
+    publicPath: '/smart',
     vendor:['axios', 'element-ui', 'babel-polyfill'],
     babel:{
         "plugins":[
