@@ -25,7 +25,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: '/naf-icons/iconfont.css' }
+      { rel: 'stylesheet', href: '/smart/naf-icons/iconfont.css' }
     ]
   },
   /*
@@ -75,7 +75,7 @@ module.exports = {
     ** Build configuration 
     */
   build: {
-    publicPath: '/smart',
+    publicPath: '/smart/_nuxt/',
     vendor:['axios', 'element-ui', 'babel-polyfill'],
     babel:{
         "plugins":[
@@ -104,6 +104,7 @@ module.exports = {
     }
   },
   router: {
+    base: '/smart/',
     routes: [
       { path: '/system/contacts', meta: {mymeta: 'hello,meta'}}
     ]
