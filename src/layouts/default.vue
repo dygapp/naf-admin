@@ -7,9 +7,12 @@
     <el-main style="padding: 0;display: flex;">
       <el-container class="main">
         <el-aside :width="asideWidth" class="sider">
-          <naf-menu theme="light" :is-collapse="menuCollapse"></naf-menu>
+          <el-scrollbar>
+            <naf-menu :style="{width: asideWidth}" theme="light" :is-collapse="menuCollapse"></naf-menu>
+          </el-scrollbar>
         </el-aside>
         <el-main class="content">
+          <el-scrollbar>
           <div class="bread" :height="layout.breadHeight">
             <naf-bread></naf-bread>
           </div>
@@ -18,6 +21,7 @@
               <nuxt />
             </transition>
           </div>
+          </el-scrollbar>
         </el-main>
       </el-container>
     </el-main>
@@ -85,8 +89,16 @@ export default {
     max-height: 100%;
     overflow: initial;
     overflow-y: auto;
-    .el-menu {
+    border-right: solid 1px #e6e6e6;
+    /*.el-menu {
       height: 100%;
+    }*/
+    .el-scrollbar {
+      height: 100%;
+      /deep/ .el-scrollbar__wrap {
+        // margin-right: 0 !important;
+        overflow-x: hidden;
+      }
     }
   }
   .main {
@@ -94,16 +106,28 @@ export default {
     overflow: hidden;
   }
   .content {
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    padding: 10px;
-    .bread,
-    .page {
+    padding: 0;
+    .bread, .page {
       padding: 10px;
     }
     .page {
       flex: 1;
+    }
+
+    .el-scrollbar {
+      height: 100%;
+      widows: 100%;
+      /deep/ .el-scrollbar__wrap {
+        overflow-x: hidden;
+        display: flex;
+      }
+      /deep/ .el-scrollbar__view {
+        padding: 10px;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        // overflow: auto;
+      }
     }
   }
 }
