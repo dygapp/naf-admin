@@ -9,6 +9,8 @@ const resolve = (dir) => {
 //   return (menu && menu.meta) || {};
 // }
 
+const url_prefix = '/smart';
+
 module.exports = {
   // mode: 'spa',
   srcDir: 'src',
@@ -61,7 +63,7 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     proxy: true,
-    prefix: '/smart',
+    prefix: url_prefix,
   },
   proxy: {
     '/apps.tcdg': 'http://wxqd.cpcxc.com/',
@@ -76,7 +78,7 @@ module.exports = {
     ** Build configuration 
     */
   build: {
-    publicPath: '/smart/_nuxt/',
+  publicPath: `${url_prefix}/_nuxt/`,
     vendor:['axios', 'element-ui', 'babel-polyfill'],
     babel:{
         "plugins":[
@@ -105,7 +107,7 @@ module.exports = {
     }
   },
   router: {
-    base: '/smart/',
+    base: `${url_prefix}/`,
     routes: [
       { path: '/system/contacts', meta: {mymeta: 'hello,meta'}}
     ]
