@@ -18,13 +18,10 @@ app.use(session({
   cookie: { maxAge: 600000 }
 }))
 
-// Require API routes
-const login = require('./routes/login')
-const dept = require('./routes/dept')
-
 // Import API Routes
-app.use('/smart/', login)
-app.use('/smart/', dept)
+app.use('/smart/', require('./mock/login'))
+app.use('/smart/', require('./mock/dept'))
+app.use('/smart/', require('./mock/menu'))
 
 // We instantiate Nuxt.js with the options
 config.isProd = process.env.NODE_ENV === 'production';

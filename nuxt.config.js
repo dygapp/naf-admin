@@ -108,16 +108,20 @@ module.exports = {
   },
   router: {
     base: `${url_prefix}/`,
-    routes: [
-      { path: '/system/contacts', meta: {mymeta: 'hello,meta'}}
-    ]
-    // middleware: ['meta'],
-    // extendRoutes (routes, resolve) {
-    //   let ret= routes.map(p=>({...p, meta: RouteMeta(p.path)}));
-    //   console.log(ret);
-    //   return ret;
-    // }
+    extendRoutes (routes) {
+      // let ret= routes.map(p=>({...p, meta: RouteMeta(p.path)}));
+      // console.log(ret);
+      // return ret;
+
+      // TODO: 重定向默认地址到'/system'
+      let index = routes.findIndex(p=>p.path === '/');
+      if(index != -1)
+        routes[index] = { path: '/', redirect: '/system' };
+      else
+        routes.push({ path: '/', redirect: '/system' });
+    }
   },  
+  // middleware: ['meta'],
   // serverMiddleware: [
   //   // API middleware
   //   './server/index.js'
