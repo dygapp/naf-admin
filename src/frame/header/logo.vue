@@ -4,9 +4,11 @@
       <img src="~/assets/logo1.svg" alt="logo" style="height:32px;width:32px;" />
     </router-link>
     <h1>{{shortName}}</h1>
+    <el-tooltip effect="dark" :content="switchTip" placement="bottom">
     <el-switch :value="navMode" active-color="#13ce66"
                 active-value="nested" inactive-value="lite" @change="switchMode">
     </el-switch>
+    </el-tooltip>
   </div>
 </template>
 <script>
@@ -22,6 +24,11 @@ export default {
   methods: {
     switchMode(payload) {
       this.$emit('switch-mode', payload);
+    }
+  },
+  computed: {
+    switchTip() {
+      return this.navMode == 'nested' ? '切换到简单导航模式' : '切换到经典导航模式';
     }
   }
 };
