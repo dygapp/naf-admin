@@ -6,10 +6,12 @@
   "private": true,
   "scripts": {
     "dev2": "nuxt",
-    "build": "nuxt build",
-    "start2": "nuxt build && nuxt start",
     "dev": "node server/express.js",
-    "start": "cross-env NODE_ENV=production node server/express.js",
+    "start1": "nuxt build && nuxt start",
+    "start2": "cross-env NODE_ENV=production node server/express.js",
+    "start": "pm2 start",
+    "stop": "pm2 stop naf-admin",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue src",
     "precommit": "npm run lint"
@@ -46,6 +48,6 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not ie <= 8"
+    "not ie <= 10"
   ]
 }
