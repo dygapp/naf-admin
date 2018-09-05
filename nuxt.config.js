@@ -78,16 +78,17 @@ module.exports = {
     ** Build configuration 
     */
   build: {
-  publicPath: `${url_prefix}/_nuxt/`,
-    vendor:['axios', 'element-ui', 'babel-polyfill'],
-    babel:{
-        "plugins":[
-            ['component',{
-                "libraryName":"element-ui",
-                "styleLibraryName":"theme-chalk"
-            }]
-        ]
-    },    /*
+    publicPath: `${url_prefix}/_nuxt/`,
+    vendor: ['axios', 'element-ui', 'babel-polyfill'],
+    babel: {
+      "plugins": [
+        ['component', {
+          "libraryName": "element-ui",
+          "styleLibraryName": "theme-chalk"
+        }]
+      ]
+    },    
+    /*
     ** Run ESLint on save
     */
     extend(config, { isDev }) {
@@ -108,19 +109,19 @@ module.exports = {
   },
   router: {
     base: `${url_prefix}/`,
-    extendRoutes (routes) {
+    extendRoutes(routes) {
       // let ret= routes.map(p=>({...p, meta: RouteMeta(p.path)}));
       // console.log(ret);
       // return ret;
 
       // TODO: 重定向默认地址到'/system'
-      let index = routes.findIndex(p=>p.path === '/');
-      if(index != -1)
+      let index = routes.findIndex(p => p.path === '/');
+      if (index != -1)
         routes[index] = { path: '/', redirect: '/system' };
       else
         routes.push({ path: '/', redirect: '/system' });
     }
-  },  
+  },
   // middleware: ['meta'],
   // serverMiddleware: [
   //   // API middleware
