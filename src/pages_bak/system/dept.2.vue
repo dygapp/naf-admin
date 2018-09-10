@@ -27,7 +27,8 @@
 </template>
 <script>
 import DataForm from '@/components/data/form';
-import DataGrid from '@/components/data/lite-grid';
+import DataList from '@/components/data/list';
+import DataGrid from '@/components/data/filter-grid';
 import DeptTree from '@/components/user/dept-tree';
 import { createNamespacedHelpers } from 'vuex';
 import config from '@/config';
@@ -42,6 +43,7 @@ const { mapState, mapActions, mapMutations } = createNamespacedHelpers(
 export default {
   components: {
     DataForm,
+    DataList,
     DataGrid,
     DeptTree
   },

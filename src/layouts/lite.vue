@@ -1,4 +1,4 @@
-<!--默认布局，只有header和footer，没有边栏和面包屑-->
+<!--简单布局，只有header和footer，没有边栏和面包屑-->
 <template>
   <el-container class="layout" direction="vertical">
     <el-header class="header" :height="layout.headerHeight" :style="{lineHeight: layout.headerHeight}">

@@ -89,6 +89,18 @@ export default {
       }
       return items;
     }
+  },
+  errorCaptured(err, vm, info) {
+    console.log(typeof err);
+    if (typeof err === 'BusinessError') {
+      this.$notify({
+        title: '请求失败',
+        message: err.message || '处理发生错误',
+        type: 'error'
+      });
+
+      return false;
+    }
   }
 };
 </script>

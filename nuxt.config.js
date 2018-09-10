@@ -9,7 +9,7 @@ const resolve = (dir) => {
 //   return (menu && menu.meta) || {};
 // }
 
-const url_prefix = '/smart';
+const url_prefix = `/smart`;
 
 module.exports = {
   // mode: 'spa',
@@ -47,13 +47,14 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui', '@/plugins/axios'
+    '@/plugins/element-ui', '@/plugins/axios', '@/plugins/check-res'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
+    ['@nuxtjs/proxy', { pathRewrite: { '.*/api/naf' : '/' } }],
     '@nuxtjs/axios',
     // '~/modules/router-meta'
   ],
@@ -63,11 +64,11 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     proxy: true,
-    prefix: url_prefix,
+    prefix: `${url_prefix}/api`,
   },
-  proxy: {
-    '/apps.tcdg': 'http://wxqd.cpcxc.com/',
-  },
+  proxy: [
+    `http://localhost:7001${url_prefix}/api/naf`,
+  ],
   loader: [
     {
       test: /\.less$/,

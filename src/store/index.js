@@ -1,7 +1,6 @@
 import * as types from '@/constants/mutation-types';
 
 export const state = () => ({
-  isAuthoriezd: false,
 })
 
 // actions

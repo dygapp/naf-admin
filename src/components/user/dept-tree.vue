@@ -1,18 +1,19 @@
 <template>
   <div class="nav-tree">
-    <el-tree :data="navItems" :props="navProps" @node-click="handleNavClick" :highlight-current="true"></el-tree>
+    <el-tree :data="treeItems" :props="navProps" @node-click="handleNavClick" :highlight-current="true"></el-tree>
   </div>
 </template>
 <script>
 export default {
   props: {
     navItems: Array,
+    dataItems: Array,
   },
   data() {
     return {
       navProps: {
         children: 'children',
-        label: 'label'
+        label: 'name'
       },
     };
   },
@@ -20,6 +21,18 @@ export default {
     handleNavClick(data) {
       this.$emit('selected', data);
     },
+  },
+  computed: {
+    treeItems() {
+      if(this.navItems) return this.navItems;
+      const items = this.dataItems || [];
+      const root = items.filter(a=> !items.some(b=>b.id === a.parentid));
+      const fetchChildren = (item)=> {
+        const children = items.filter(p=> p.parentid === item.id).map(p=> fetchChildren(p));
+        return { ...item, children };
+      };
+      return root.map(p=> fetchChildren(p));
+    }
   }
 };
 </script>

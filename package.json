@@ -17,6 +17,8 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
     "@nuxtjs/axios": "^5.3.1",
     "body-parser": "^1.18.3",
     "echarts": "^4.1.0",
@@ -24,12 +26,12 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "moment": "^2.22.2",
+    "naf-core": "0.0.24",
     "nuxt-edge": "latest"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
     "babel-plugin-component": "^1.1.1",
-    "babel-polyfill": "^6.26.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",

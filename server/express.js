@@ -8,7 +8,7 @@ const app = require('express')()
 let config = require('../nuxt.config.js')
 
 // Body parser, to access `req.body`
-app.use(bodyParser.json())
+app.use('/smart/api/login', bodyParser.json())
 
 // Sessions to create `req.session`
 app.use(session({

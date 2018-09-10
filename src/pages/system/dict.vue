@@ -1,19 +1,134 @@
 <template>
-  <demo-table :fields="fields" :filters="filters"></demo-table>
+  <div class="mixed">
+    <el-card class="left">
+      <div slot="header" class="top">
+        <span>{{productName}}</span>
+        <el-button icon="el-icon-edit" style="float: right; padding: 3px 0" type="text" @click="setCurrent()"> </el-button>
+      </div>
+      <dept-tree @selected="setCurrent" :data-items="items"></dept-tree>
+    </el-card>
+    <el-card class="right list" size="mini" v-if="view ==  'list'">
+      <div slot="header" class="clearfix">
+        <span>{{(current && current.name) || '&nbsp;' }}</span>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew">添加子部门 </el-button>
+      </div>
+      <data-list :data="list" :filter="false" :meta="fields" @edit="handleEdit" @delete="handleDelete">
+      </data-list>
+    </el-card>
+    <el-card class="right details" size="mini" v-else>
+      <div slot="header" class="clearfix">
+        <span>{{form.isNew?'添加部门':'修改部门' }}</span>
+        <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
+      </div>
+      <data-form :data="form" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}" @save="handleSave">
+      </data-form>
+    </el-card>
+  </div>
 </template>
 <script>
-import DemoTable from '@/components/data/demo-table';
+import DataForm from '@/components/data/form';
+import DataList from '@/components/data/list';
+import DeptTree from '@/components/user/dept-tree';
+import { createNamespacedHelpers } from 'vuex';
+import config from '@/config';
+import * as types from '@/constants/mutation-types';
+
+const { productName } = config;
+
+const { mapState, mapActions, mapMutations } = createNamespacedHelpers(
+  'naf/dept'
+);
 
 export default {
   components: {
-    DemoTable,
+    DataForm,
+    DataList,
+    DeptTree
+  },
+  mounted() {
+    this.load();
   },
   data() {
     return {
-      fields: ['分类', '代码', '名称'],
-      filters: ['分类', '代码'],
+      productName,
+      view: 'list',
+      form: {},
+      rules: {
+        name: [
+          { required: true, message: '请输入部门名称', trigger: 'blur' },
+          { min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur' }
+        ]
+      },
+      fields: [
+        { name: 'id', label: '部门ID', editable: false },
+        { name: 'parentid', label: '上级部门ID', readonly: true, order: 100 },
+        {
+          field: { name: 'name', label: '部门名称', required: true },
+          slots: ['list', 'form', 'filter']
+        }
+      ]
     };
   },
+  methods: {
+    ...mapActions(['load', 'create', 'delete', 'update']),
+    ...mapMutations({ setCurrent: types.DEPT_SELECTED }),
+    handleEdit(data) {
+      this.form = { ...data, isNew: false };
+      this.view = 'details';
+    },
+    handleNew() {
+      const { id: parentid } = this.current || { id: 0 };
+      this.form = { parentid, isNew: true };
+      this.view = 'details';
+    },
+    async handleSave(payload) {
+      let res;
+      if (payload.isNew) {
+        res = await this.create(payload.data);
+      } else {
+        res = await this.update(payload.data);
+      }
+      if(this.$checkRes(res, '数据保存成功')){
+        this.view = 'list';
+      }
+    },
+    async handleDelete(data) {
+      const res = await this.delete(data);
+      this.$checkRes(res, '删除数据成功');
+    }
+  },
+  computed: {
+    ...mapState(['current', 'items']),
+    list() {
+      const { id } = this.current || { id: 0 };
+      return this.items.filter(p => p.parentid === id);
+    }
+  }
 };
 </script>
-
+<style lang="less" scoped>
+.mixed {
+  min-height: 100%;
+  width: 900px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+.el-card {
+  min-height: 100%;
+}
+.el-card /deep/ .el-card__header {
+  padding: 10px;
+}
+.left {
+  width: 260px;
+}
+.left .top {
+  justify-content: space-around;
+  align-items: left;
+}
+.right {
+  flex: 1;
+}
+</style>

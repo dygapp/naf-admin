@@ -68,12 +68,6 @@ export default {
       // console.log(res);
       if (res.errcode === 0) {
         this.$router.push(this.$route.query.redirect || '/login');
-      } else {
-        console.log(res);
-        this.$message({
-          type: 'error',
-          message: res.message,
-        });
       }
     }
   },

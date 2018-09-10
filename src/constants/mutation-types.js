@@ -8,7 +8,11 @@ export const APPS_LOADED = 'APPS_LOADED';
 export const APPS_SELECTED = 'APPS_SELECTED';
 
 export const DEPT_LOADED = 'DEPT_LOADED';
+export const DEPT_LISTED = 'DEPT_LISTED';
 export const DEPT_SELECTED = 'DEPT_SELECTED';
+export const DEPT_CREATED = 'DEPT_CREATED';
+export const DEPT_UPDATED = 'DEPT_UPDATED';
+export const DEPT_DELETED = 'DEPT_DELETED';
 
 export const NAV_MENU_LOADED = 'NAV_MENU_LOADED';
 export const NAV_MODULE_SELECTED = 'NAV_MODULE_SELECTED';
