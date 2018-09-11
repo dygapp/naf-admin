@@ -2,108 +2,185 @@
   <div class="mixed">
     <el-card class="left">
       <div slot="header" class="top">
-        <span>{{productName}}</span>
-        <el-button icon="el-icon-edit" style="float: right; padding: 3px 0" type="text" @click="setCurrent()"> </el-button>
+        <span>字典分类</span>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNewCatg"> </el-button>
       </div>
-      <dept-tree @selected="setCurrent" :data-items="items"></dept-tree>
+      <el-tree :data="treeData" :props="{label: 'name'}" @node-click="selectCatg" :render-content="renderNavNode" :highlight-current="true"></el-tree>
     </el-card>
-    <el-card class="right list" size="mini" v-if="view ==  'list'">
+    <el-card class="right list" size="mini" v-if="view == 'list'">
       <div slot="header" class="clearfix">
-        <span>{{(current && current.name) || '&nbsp;' }}</span>
-        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew">添加子部门 </el-button>
+        <span>{{(category && category.name) || '字典数据' }}</span>
+        <el-button icon="el-icon-plus" style="float: right; padding: 3px 0" type="text" @click="handleNew" :disabled="!category">添加字典项</el-button>
       </div>
-      <data-list :data="list" :filter="false" :meta="fields" @edit="handleEdit" @delete="handleDelete">
-      </data-list>
+      <data-grid :data="itemData" :filter="true" :meta="fields" @edit="handleEdit" @delete="handleDelete" @query="handleQuery">
+      </data-grid>
     </el-card>
     <el-card class="right details" size="mini" v-else>
       <div slot="header" class="clearfix">
-        <span>{{form.isNew?'添加部门':'修改部门' }}</span>
+        <span>{{form.isNew?'添加字典项':'修改字典项' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="form" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}" @save="handleSave">
+      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :options="{'label-width':'120px', size: 'small'}" @save="handleSave">
       </data-form>
     </el-card>
+    <data-dlg title="字典类别" width="400px" v-if="catgDlg" :visible.sync="catgDlg" :data="catgForm.data" :is-new="catgForm.isNew" 
+      :options="{'label-width':'80px', size: 'mini'}" :meta="catgFields" @save="handleSaveCatg" @cancel="catgDlg = false">
+    </data-dlg>
   </div>
 </template>
 <script>
-import DataForm from '@/components/data/form';
-import DataList from '@/components/data/list';
-import DeptTree from '@/components/user/dept-tree';
+import DataForm from '@/naf/data/form';
+import DataDlg from '@/naf/data/form-dlg';
+import DataGrid from '@/naf/data/filter-grid';
+import DeptTree from '@/naf/user/dept-tree';
 import { createNamespacedHelpers } from 'vuex';
-import config from '@/config';
-import * as types from '@/constants/mutation-types';
-
-const { productName } = config;
+import * as types from '@/store/system/.dict';
 
 const { mapState, mapActions, mapMutations } = createNamespacedHelpers(
-  'naf/dept'
+  'system/dict'
 );
 
 export default {
   components: {
     DataForm,
-    DataList,
+    DataDlg,
+    DataGrid,
     DeptTree
   },
   mounted() {
-    this.load();
+    this.loadCatg();
   },
   data() {
     return {
-      productName,
       view: 'list',
+      catgDlg: false,
+      catgForm: {},
       form: {},
-      rules: {
-        name: [
-          { required: true, message: '请输入部门名称', trigger: 'blur' },
-          { min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur' }
-        ]
-      },
       fields: [
-        { name: 'id', label: '部门ID', editable: false },
-        { name: 'parentid', label: '上级部门ID', readonly: true, order: 100 },
-        {
-          field: { name: 'name', label: '部门名称', required: true },
-          slots: ['list', 'form', 'filter']
-        }
-      ]
+        { name: 'code', label: '代码', editable: false, required: true },
+        { name: 'name', label: '名称', required: true },
+        { name: 'category', label: '类别', readonly: true, order: 100 },
+        { name: 'group', label: '子类', filter: true },
+        { name: 'status', label: '状态', filter: true },
+      ],
+      catgFields: [
+        { name: 'code', label: '代码', editable: false, required: true },
+        { name: 'name', label: '名称', required: true },
+      ],
+      filter: undefined,
     };
   },
+  computed: {
+    ...mapState(['category', 'categories', 'items']),
+    treeData() {
+      return this.categories.map(p=>({...p,id: p._id}));
+    },
+    itemData() {
+      if(this.filter){
+        return this.items.filter(p=>{
+          for(const key in this.filter){
+            if(p[key] !== this.filter[key]){
+              return false;
+            }
+          }
+          return true;
+        });
+      }
+      return this.items;
+    }
+  },
   methods: {
-    ...mapActions(['load', 'create', 'delete', 'update']),
-    ...mapMutations({ setCurrent: types.DEPT_SELECTED }),
-    handleEdit(data) {
-      this.form = { ...data, isNew: false };
+    ...mapActions(['loadCatg', 'createCatg', 'deleteCatg', 'updateCatg', 'loadItem', 'createItem', 'deleteItem', 'updateItem', 'selectCatg']),
+    ...mapMutations({ setCategory: types.CATG_SELECTED }),
+    handleNew() {
+      if(!this.category) return ;
+      this.form = { data: { category: this.category.code }, isNew: true };
       this.view = 'details';
     },
-    handleNew() {
-      const { id: parentid } = this.current || { id: 0 };
-      this.form = { parentid, isNew: true };
+    handleNewCatg() {
+      this.catgForm = { data: {}, isNew: true };
+      this.catgDlg = true;
+    },
+    handleEdit(data) {
+      this.form = { data, isNew: false };
       this.view = 'details';
+    },
+    handleEditCatg(data) {
+      this.catgForm = { data, isNew: false };
+      this.catgDlg = true;
+    },
+    handleQuery({filter}) {
+      this.filter = filter;
     },
     async handleSave(payload) {
       let res;
       if (payload.isNew) {
-        res = await this.create(payload.data);
+        res = await this.createItem(payload.data);
       } else {
-        res = await this.update(payload.data);
+        res = await this.updateItem(payload.data);
       }
-      if(this.$checkRes(res, '数据保存成功')){
+      if (this.$checkRes(res, '数据保存成功')) {
         this.view = 'list';
       }
     },
+    async handleSaveCatg(payload) {
+      let res, msg;
+      if (payload.isNew) {
+        res = await this.createCatg(payload.data);
+        msg = '创建字典分类成功';
+      } else {
+        res = await this.updateCatg(payload.data);
+        msg = '修改字典分类成功';
+      }
+      if (this.$checkRes(res, msg)) {
+        this.catgDlg = false;
+      }
+    },
     async handleDelete(data) {
-      const res = await this.delete(data);
+      const res = await this.deleteItem(data);
       this.$checkRes(res, '删除数据成功');
+    },
+    async handleDeleteCatg(data) {
+      const res = await this.deleteCatg(data);
+      this.$checkRes(res, '删除字典分类成功');
+    },
+    handleNavCmd(cmd, data) {
+      console.debug('nav command:', cmd, data);
+      if(cmd === 'edit') {
+        this.handleEditCatg(data);
+      } else if (cmd === 'delete') {
+        this.handleDeleteCatg(data);
+      }
+    },
+    renderNavNode(h, { node, data /* , store */ }) {
+      const clickHandler = e => {
+        console.debug('show nav dropdown:', data);
+        e.stopPropagation();
+      };
+      const handleCommand = (cmd) => {
+        this.handleNavCmd(cmd, data);
+      }
+      return (
+        <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
+          <span>
+            <span>{node.label}</span>
+          </span>
+          <el-dropdown class="nav-btn" trigger="click" size="mini" on-command={handleCommand}>
+            <span class="el-dropdown-link" on-click={clickHandler}>
+              <i class="naf-icons naf-icon-dian" />
+            </span>
+            <el-dropdown-menu class="action-menu" slot="dropdown">
+              <el-dropdown-item command="edit">修改名称</el-dropdown-item>
+              <el-dropdown-item command="delete">删除</el-dropdown-item>
+              <el-dropdown-item divided disabled>
+                类别代码: {data.code}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </span>
+      );
     }
   },
-  computed: {
-    ...mapState(['current', 'items']),
-    list() {
-      const { id } = this.current || { id: 0 };
-      return this.items.filter(p => p.parentid === id);
-    }
-  }
 };
 </script>
 <style lang="less" scoped>
@@ -130,5 +207,27 @@ export default {
 }
 .right {
   flex: 1;
+  /deep/ .el-card__body {
+    padding: 0;
+  }
+}
+.left {
+  /deep/ .el-card__body {
+    padding: 0;
+  }
+  /deep/ .el-tree-node.is-current > .el-tree-node__content {
+    background-color: #409eff;
+    color: white;
+    .naf-icon-dian {
+      display: inline;
+      color: white;
+    }
+  }
+  /deep/ .naf-icon-dian {
+    display: none;
+  }
+  /deep/ .el-tree-node__content:hover .naf-icon-dian {
+    display: inline;
+  }
 }
 </style>

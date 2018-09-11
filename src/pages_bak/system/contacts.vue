@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import UserTable from '@/components/contacts/user-table';
+import UserTable from '@/naf/contacts/user-table';
 
 export default {
   components: {

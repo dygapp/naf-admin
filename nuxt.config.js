@@ -54,7 +54,7 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    ['@nuxtjs/proxy', { pathRewrite: { '.*/api/naf' : '/' } }],
+    ['@nuxtjs/proxy', { pathRewrite: { '.*/api/system/dict' : '/', '.*/api/system' : '/' } }],
     '@nuxtjs/axios',
     // '~/modules/router-meta'
   ],
@@ -67,7 +67,8 @@ module.exports = {
     prefix: `${url_prefix}/api`,
   },
   proxy: [
-    `http://localhost:7001${url_prefix}/api/naf`,
+    `http://localhost:7002${url_prefix}/api/system/dict`,
+    `http://localhost:7001${url_prefix}/api/system`,
   ],
   loader: [
     {

@@ -26,9 +26,9 @@
   </div>
 </template>
 <script>
-import DataForm from '@/components/data/form';
-import DataGrid from '@/components/data/lite-grid';
-import DeptTree from '@/components/user/dept-tree';
+import DataForm from '@/naf/data/form';
+import DataGrid from '@/naf/data/lite-grid';
+import DeptTree from '@/naf/user/dept-tree';
 import { createNamespacedHelpers } from 'vuex';
 import config from '@/config';
 import * as types from '@/constants/mutation-types';
@@ -36,7 +36,7 @@ import * as types from '@/constants/mutation-types';
 const { productName } = config;
 
 const { mapState, mapActions, mapMutations } = createNamespacedHelpers(
-  'naf/dept'
+  'system/dept'
 );
 
 export default {

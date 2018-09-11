@@ -1,5 +1,5 @@
 <template>
-  <div class="contacts">
+  <div class="mixed">
     <el-card class="left">
       <div slot="header" class="top">
         <span>{{productName}}</span>
@@ -20,23 +20,23 @@
         <span>{{form.isNew?'添加部门':'修改部门' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="form" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}" @save="handleSave">
+      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}" @save="handleSave">
       </data-form>
     </el-card>
   </div>
 </template>
 <script>
-import DataForm from '@/components/data/form';
-import DataGrid from '@/components/data/lite-grid';
-import DeptTree from '@/components/user/dept-tree';
+import DataForm from '@/naf/data/form';
+import DataGrid from '@/naf/data/lite-grid';
+import DeptTree from '@/naf/user/dept-tree';
 import { createNamespacedHelpers } from 'vuex';
 import config from '@/config';
-import * as types from '@/constants/mutation-types';
+import * as types from '@/store/system/.dept';
 
 const { productName } = config;
 
 const { mapState, mapActions, mapMutations } = createNamespacedHelpers(
-  'naf/dept'
+  'system/dept'
 );
 
 export default {
@@ -71,14 +71,14 @@ export default {
   },
   methods: {
     ...mapActions(['load', 'create', 'delete', 'update']),
-    ...mapMutations({ setCurrent: types.DEPT_SELECTED }),
+    ...mapMutations({ setCurrent: types.SELECTED }),
     handleEdit(data) {
-      this.form = { ...data, isNew: false };
+      this.form = { data, isNew: false };
       this.view = 'details';
     },
     handleNew() {
       const { id: parentid } = this.current || { id: 0 };
-      this.form = { parentid, isNew: true };
+      this.form = { data: { parentid }, isNew: true };
       this.view = 'details';
     },
     async handleSave(payload) {
@@ -107,7 +107,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.contacts {
+.mixed {
   min-height: 100%;
   width: 900px;
   padding-right: 10px;

@@ -47,8 +47,8 @@
   </div>
 </template>
 <script>
-import DemoTable from '@/components/data/demo-table';
-import DeptTree from '@/components/user/dept-tree';
+import DemoTable from '@/naf/data/demo-table';
+import DeptTree from '@/naf/user/dept-tree';
 import { createNamespacedHelpers } from 'vuex';
 import config from '@/config';
 import * as types from '@/constants/mutation-types';
@@ -56,7 +56,7 @@ import * as types from '@/constants/mutation-types';
 const { productName } = config;
 
 const { mapState, mapActions, mapMutations } = createNamespacedHelpers(
-  'naf/dept'
+  'system/dept'
 );
 
 export default {

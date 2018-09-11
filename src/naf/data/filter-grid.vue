@@ -63,9 +63,13 @@ export default {
   },
   methods: {
     async query() {
+      let filter = { [this.filterData.name]: this.filterData.value };
+      if(this.filterData.name == undefined || this.filterData.value == undefined || this.filterData.value == '') {
+        filter = undefined;
+      }
       this.$emit('query', {
-        filter: { [this.filterData.name]: this.filterData.value },
-        paging: { page, size }
+        filter,
+        paging: { page: this.page, size: this.size }
       });
     },
     handleSizeChange(val) {
