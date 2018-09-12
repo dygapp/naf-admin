@@ -34,10 +34,10 @@
 <script>
 import { mapState } from 'vuex';
 import config from '@/config';
-import NafHeader from '@/frame/header';
-import NafFooter from '@/frame/footer';
-import NafSider from '@/frame/sider';
-import NafBread from '@/frame/bread';
+import NafHeader from '@/naf/frame/header';
+import NafFooter from '@/naf/frame/footer';
+import NafSider from '@/naf/frame/sider';
+import NafBread from '@/naf/frame/bread';
 
 const defaultConfig = {
   breadHeight: '24px',
