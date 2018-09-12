@@ -2,7 +2,10 @@
   <el-form ref="form" :model="form" :rules="rules" v-bind="options">
     <slot>
       <el-form-item v-for="(item,index) in fields" :key="'form-field-'+index" :label="item.field.label" :prop="item.field.name" :required="item.field.required" :rules="item.rules" v-bind="item.formOpts">
-        <el-input v-model="form[item.field.name]" :disabled="readonly || item.field.readonly || (!isNew && item.field.editable === false)"></el-input>
+        <el-select v-if="item.dict" v-model="form[item.field.name]" placeholder="请选择">
+          <el-option v-for="(_item,_index) in item.dict" :key="'option-item-'+_index" :label="_item.name" :value="_item.code" :disabled="_item.status == '1'"></el-option>
+        </el-select>        
+        <el-input v-else v-model="form[item.field.name]" :disabled="readonly || item.field.readonly || (!isNew && item.field.editable === false)"></el-input>
       </el-form-item>
       <el-form-item v-show="!readonly">
         <el-button type="primary" @click="handleSave">保存</el-button>
@@ -44,7 +47,10 @@ export default {
       return this.meta
         .map(FieldMeta)
         .filter(p => p.slots.form)
-        .sort((a, b) => b.order - a.order);
+        .sort((a, b) => b.order - a.order)
+        .map(p=>({
+          ...p, dict: this.$dict && p.formatter && p.formatter.name === 'dict' && this.$dict(p.formatter.param)
+        }));
     }
   }
 };

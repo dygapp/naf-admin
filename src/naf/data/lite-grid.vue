@@ -1,7 +1,7 @@
 <template>
   <el-table border style="width: 100%;overflow: auto;" v-bind="options" :data="data">
     <slot>
-      <el-table-column v-for="(item,index) in listFields" :key="'field'+index" :label="item.label" :prop="item.name" v-bind="item.options" />
+      <el-table-column v-for="(item,index) in listFields" :key="'field'+index" :label="item.label" :prop="item.name" v-bind="item.options" :formatter="item.formatter"/>
       <el-table-column label="操作" width="100" v-if="!readonly">
         <template slot-scope="scope">
           <el-button v-for="(item,index) in operItems" :key="'field'+index" @click="handleOper(item, scope.row)" type="text" size="small">{{item.label}}</el-button>
@@ -11,7 +11,7 @@
   </el-table>
 </template>
 <script>
-import { FieldMeta, Operation } from './meta-util';
+import { FieldMeta, Operation, Formatter } from './meta-util';
 
 export default {
   name: 'lite-grid',
@@ -47,7 +47,7 @@ export default {
           });
         }
       }
-    }
+    },
   },
   computed: {
     listFields() {
@@ -55,7 +55,7 @@ export default {
         .map(FieldMeta)
         .filter(p => p.slots.list)
         // .sort((a, b) => b.order - a.order)
-        .map(p => ({ ...p.field, options: p.listOpts }));
+        .map(p => ({ ...p.field, options: p.listOpts, formatter: Formatter(p, this) }));
       // console.log('listFields: ', res);
       return res;
     },

@@ -47,7 +47,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui', '@/plugins/axios', '@/plugins/check-res'
+    '@/plugins/element-ui', '@/plugins/axios', '@/plugins/check-res', '@/plugins/naf-dict'
   ],
   /*
   ** Nuxt.js modules

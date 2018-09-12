@@ -47,6 +47,10 @@ export default {
     DataGrid,
     DeptTree
   },
+  async fetch({store}) {
+    // 加载字典数据
+    await store.dispatch('naf/dict/load', 'usage');
+  },
   mounted() {
     this.loadCatg();
   },
@@ -61,7 +65,7 @@ export default {
         { name: 'name', label: '名称', required: true },
         { name: 'category', label: '类别', readonly: true, order: 100 },
         { name: 'group', label: '子类', filter: true },
-        { name: 'status', label: '状态', filter: true },
+        { name: 'status', label: '状态', filter: true, formatter: 'dict:usage' },
       ],
       catgFields: [
         { name: 'code', label: '代码', editable: false, required: true },
@@ -207,6 +211,8 @@ export default {
 }
 .right {
   flex: 1;
+}
+.right.list {
   /deep/ .el-card__body {
     padding: 0;
   }
