@@ -29,7 +29,8 @@ module.exports = {
         'acc', // for reduce accumulators
         'req', // for server request 
         'e', // for e.returnvalue
-        'Vue', // for Vue
+        'Vue', // for Vue,
+        'routes',
       ]
     }],
     // allow debugger during development
