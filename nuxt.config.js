@@ -1,9 +1,9 @@
-const path = require("path");
+// const path = require("path");
 // const menus = require('./src/config/menus').routes;
 
-const resolve = (dir) => {
-  return path.join(__dirname, '..', dir)
-}
+// const resolve = (dir) => {
+//   return path.join(__dirname, '..', dir)
+// }
 // const RouteMeta = (path) => {
 //   const menu = menus.find(p=>p.path==path);
 //   return (menu && menu.meta) || {};
@@ -14,6 +14,10 @@ const url_prefix = `/smart`;
 module.exports = {
   // mode: 'spa',
   srcDir: 'src',
+  // server: {
+  //   port: 3100,
+  //   host: localhost,
+  // },
   /*
   ** Headers of the page
   */
@@ -27,7 +31,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: '/smart/naf-icons/iconfont.css' }
+      { rel: 'stylesheet', href: `${url_prefix}/naf-icons/iconfont.css` }
     ]
   },
   /*
@@ -65,6 +69,7 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
     proxy: true,
     prefix: `${url_prefix}/api`,
+    // port: 3000,
   },
   proxy: [
     `http://localhost:7002${url_prefix}/api/system/dict`,
