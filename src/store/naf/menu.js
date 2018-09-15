@@ -1,4 +1,5 @@
-import * as types from '@/constants/mutation-types';
+import * as Cookies from 'js-cookie';
+import * as types from './.menu';
 
 // initial state
 // shape: [{ id, quantity }]
@@ -22,6 +23,12 @@ export const actions = {
     } catch (err) {
       console.error(err);
       return { errcode: -1, errmsg: err.message || '处理失败' };
+    }
+  },
+  async switchMode({ commit }, payload) {
+    commit(types.NAV_SWITCH_MODE, payload);
+    if (process.browser) {
+      Cookies.set('navMode', payload);
     }
   },
 };

@@ -4,11 +4,13 @@
 const { Nuxt, Builder } = require('nuxt-edge')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const cookieParser = require('cookie-parser');
 const app = require('express')()
 let config = require('../nuxt.config.js')
 
 // Body parser, to access `req.body`
 app.use('/smart/api/login', bodyParser.json())
+app.use(cookieParser());
 
 // Sessions to create `req.session`
 app.use(session({

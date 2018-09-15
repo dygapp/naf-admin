@@ -2,8 +2,8 @@ import _ from 'lodash';
 
 /* 字段定义 */
 export const FieldMeta = (meta) => {
-  let { field, slots } = meta;
-  const { rules, formOpts, listOpts, order = 0 } = meta;
+  let { field, slots, listOpts } = meta;
+  const { rules, formOpts, order = 0 } = meta;
   if (field === undefined) {
     const { name, label, required = false, readonly = false, editable = true } = meta;
     field = { name, label, required, readonly, editable };
@@ -93,4 +93,21 @@ export const Formatter = (meta, _this) => {
   }
 
   return formatter;
+}
+
+export const MergeFilters = (meta, _this) => {
+  // 生成column filters
+  let { formatter, listOpts } = meta;
+  if (listOpts && listOpts.filterable && _.isObject(formatter) && formatter.name === 'dict') {
+    let items = _this.$dict(formatter.param);
+    if(!items || items.length > 20) return undefined;
+
+    const filterMethod = (value, row, column) => {
+      const property = column['property'];
+      return row[property] === value;
+    }
+
+    const filters = items.map(p=>({text: p.name, value: p.code}));
+    return { filters, filterMethod, ...listOpts };
+  }
 }

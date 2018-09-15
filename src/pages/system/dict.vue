@@ -31,7 +31,7 @@
 <script>
 import DataForm from '@/naf/data/form';
 import DataDlg from '@/naf/data/form-dlg';
-import DataGrid from '@/naf/data/filter-grid';
+import DataGrid from '@/naf/data/lite-grid';
 import DeptTree from '@/naf/user/dept-tree';
 import { createNamespacedHelpers } from 'vuex';
 import * as types from '@/store/system/.dict';
@@ -65,7 +65,7 @@ export default {
         { name: 'name', label: '名称', required: true },
         { name: 'category', label: '类别', readonly: true, order: 100 },
         { name: 'group', label: '子类', filter: true },
-        { name: 'status', label: '状态', filter: true, formatter: 'dict:usage' },
+        { name: 'status', label: '状态', filter: true, formatter: 'dict:usage', listOpts: { filterable: true } },
       ],
       catgFields: [
         { name: 'code', label: '代码', editable: false, required: true },

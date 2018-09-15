@@ -97,7 +97,7 @@ export default {
         if (err == 'cancel') {
           this.$message({
             type: 'info',
-            message: `已取消${confirm}`
+            message: `已取消${label}`
           });
         }
       }

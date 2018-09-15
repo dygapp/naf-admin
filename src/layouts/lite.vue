@@ -2,15 +2,14 @@
 <template>
   <el-container class="layout" direction="vertical">
     <el-header class="header" :height="layout.headerHeight" :style="{lineHeight: layout.headerHeight}">
-      <naf-header :short-name="name" :logo-width="asideWidth" :menu-collapse="menuCollapse" :nav-mode="navMode" 
-                  @toggle-menu="toggleMenu" @switch-mode="switchMode" :menu-items="navModules"/>
+      <naf-header :short-name="name" :logo-width="asideWidth" :menu-collapse="menuCollapse" :nav-mode="navMode" @toggle-menu="toggleMenu" @switch-mode="switchMode" :menu-items="navModules" />
     </el-header>
     <el-main class="content">
-          <el-scrollbar>
-            <transition>
-              <nuxt />
-            </transition>
-          </el-scrollbar>
+      <el-scrollbar>
+        <transition>
+          <nuxt />
+        </transition>
+      </el-scrollbar>
     </el-main>
     <el-footer class="footer" height="layout.footerHeight">
       <naf-footer></naf-footer>
@@ -18,19 +17,24 @@
   </el-container>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { createNamespacedHelpers } from 'vuex';
 import config from '@/config';
 import NafHeader from '@/naf/frame/header';
 import NafFooter from '@/naf/frame/footer';
 import NafMenu from '@/naf/frame/sider';
 import NafBread from '@/naf/frame/bread';
+import * as types from '@/store/naf/.menu';
+
+const { mapState,  mapActions, mapMutations } = createNamespacedHelpers(
+  'naf/menu'
+);
 
 const defaultConfig = {
   breadHeight: '24px',
   headerHeight: '64px',
   footerHeight: '48px',
   asideExpandWidth: '256px',
-  asideCollapseWidth: '64px',
+  asideCollapseWidth: '64px'
 };
 
 const { layout = {} } = config;
@@ -49,19 +53,18 @@ export default {
     };
   },
   methods: {
-    toggleMenu() {
-      this.$store.commit('menu/NAV_TOGGLE_COLLAPSE');
-    },
-    switchMode(mode) {
-      this.$store.commit('menu/NAV_SWITCH_MODE', mode);
-    },
+    ...mapMutations({
+      toggleMenu: types.NAV_TOGGLE_COLLAPSE,
+    }),
+    ...mapActions(['switchMode']),
   },
   computed: {
     ...mapState({
-      navMode: state => state.menu.mode,
-      navModule: state => state.menu.current,
-      navModules: state => state.menu.modules,
-      menuCollapse: state => state.menu.collapse,
+      navMode: 'mode',
+      navModule: 'current',
+      navModules: 'modules',
+      menuCollapse: 'collapse',
+      items: 'items'
     }),
     asideWidth() {
       return this.menuCollapse
@@ -69,12 +72,12 @@ export default {
         : layout.asideExpandWidth;
     },
     menuItems() {
-      let items = this.$store.state.menu.items || [];
-      if(this.navMode == 'nested') {
-        items = items.filter(p=>p.options.module == this.navModule);
+      let items = this.items || [];
+      if (this.navMode == 'nested') {
+        items = items.filter(p => p.options.module == this.navModule);
       }
       return items;
-    },
+    }
   }
 };
 </script>

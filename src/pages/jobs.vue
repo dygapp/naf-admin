@@ -5,7 +5,7 @@
 export default {
   layout: 'nested',
   async fetch({store, $axios}) {
-    store.commit('menu/NAV_MODULE_SELECTED', 'jobs');
+    store.commit('naf/menu/NAV_MODULE_SELECTED', 'jobs');
   }
 };
 </script>
