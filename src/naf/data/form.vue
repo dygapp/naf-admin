@@ -40,6 +40,17 @@ export default {
           console.warn('form validate error!!!');
         }
       });
+    },
+    mergeRules(meta) {
+      if( meta.field.required && 
+          (!this.rules || !this.rules[meta.field.name] || !this.rules[meta.field.name].some(p=>p.required)) &&
+          (!meta.rules || !meta.rules || !meta.rules.some(p=>p.required))){
+        const rules = meta.rules || [];
+        rules.push({ required: true, message: '不能为空', trigger: 'blur' });
+        return rules;
+      } else {
+        return meta.rules;
+      }
     }
   },
   computed: {
@@ -49,7 +60,7 @@ export default {
         .filter(p => p.slots.form)
         .sort((a, b) => b.order - a.order)
         .map(p=>({
-          ...p, dict: this.$dict && p.formatter && p.formatter.name === 'dict' && this.$dict(p.formatter.param)
+          ...p, dict: this.$dict && p.formatter && p.formatter.name === 'dict' && this.$dict(p.formatter.param), rules: this.mergeRules(p)
         }));
     }
   }
