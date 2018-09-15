@@ -56,8 +56,12 @@ export const Operation = (meta) => {
   }
   return items.map(item => {
     if (_.isArray(item)) {
-      const [event, label, confirm = false] = item;
-      return { event, label, confirm };
+      let [event, label, icon, confirm = false ] = item;
+      if(_.isBoolean(icon)){
+        confirm = icon;
+        icon = undefined;
+      } 
+      return { event, label, icon, confirm };
     }
     return item;
   });

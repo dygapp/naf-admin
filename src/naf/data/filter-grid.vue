@@ -16,7 +16,7 @@
       </slot>
     </el-header>
     <el-main class="table-area">
-      <lite-grid :data="data" :meta="meta" :options="options" :readonly="readonly" @oper="handleOper">
+      <lite-grid :data="data" :meta="meta" :options="options" :readonly="readonly" :operation="operation" @oper="handleOper">
         <slot>
         </slot>
       </lite-grid>
@@ -45,9 +45,7 @@ export default {
       type: Object,
       default: () => ({ size: 'mini' })
     } /* 表格扩展属性 */,
-    operation: {
-      default: () => [['edit', '编辑'], ['delete', '删除', true]]
-    } /* 操作类型 */,
+    operation: Array,
     data: Array,
     total: { type: Number, default: 0 } /* 总数据条数 */
   },
@@ -115,6 +113,9 @@ export default {
   .el-select {
     width: 100px;
   }
+}
+.el-main {
+  padding: 10px 20px;
 }
 // .table-area {
 //   padding: 0;

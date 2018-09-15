@@ -5,10 +5,11 @@
         <el-select v-if="item.dict" v-model="form[item.field.name]" placeholder="请选择">
           <el-option v-for="(_item,_index) in item.dict" :key="'option-item-'+_index" :label="_item.name" :value="_item.code" :disabled="_item.status == '1'"></el-option>
         </el-select>        
-        <el-input v-else v-model="form[item.field.name]" :disabled="readonly || item.field.readonly || (!isNew && item.field.editable === false)"></el-input>
+        <el-input v-else v-model="form[item.field.name]" :disabled="readonly || item.field.readonly || (!isNew && item.field.editable === false)" :placeholder="item.formOpts && item.formOpts.placeholder" :type="item.formOpts && item.formOpts.inputType"></el-input>
       </el-form-item>
       <el-form-item v-show="!readonly">
         <el-button type="primary" @click="handleSave">保存</el-button>
+        <el-button type="info" @click="$emit('cancel')">取消</el-button>
       </el-form-item>
     </slot>
   </el-form>
@@ -51,6 +52,9 @@ export default {
       } else {
         return meta.rules;
       }
+    },
+    validateField(payload){
+      this.$refs['form'].validateField(payload);
     }
   },
   computed: {

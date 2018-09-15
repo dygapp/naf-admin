@@ -20,7 +20,7 @@
         <span>{{form.isNew?'添加字典项':'修改字典项' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :options="{'label-width':'120px', size: 'small'}" @save="handleSave">
+      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :options="{'label-width':'120px', size: 'small'}" @save="handleSave"  @cancel="view = 'list'">
       </data-form>
     </el-card>
     <data-dlg title="字典类别" width="400px" v-if="catgDlg" :visible.sync="catgDlg" :data="catgForm.data" :is-new="catgForm.isNew" 
@@ -188,35 +188,8 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.mixed {
-  min-height: 100%;
-  width: 900px;
-  padding-right: 10px;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-}
-.el-card {
-  min-height: 100%;
-}
-.el-card /deep/ .el-card__header {
-  padding: 10px;
-}
-.left {
-  width: 260px;
-}
-.left .top {
-  justify-content: space-around;
-  align-items: left;
-}
-.right {
-  flex: 1;
-}
-.right.list {
-  /deep/ .el-card__body {
-    padding: 0;
-  }
-}
+@import './style/mixed.less';
+
 .left {
   /deep/ .el-card__body {
     padding: 0;

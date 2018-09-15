@@ -29,4 +29,5 @@ export const mutations = {
 export const getters = {
   isAuthenticated: state => state.login.isAuthenticated,
   userinfo: state => state.login.userinfo,
+  menuItems: state => state.naf.menu.items,
 }

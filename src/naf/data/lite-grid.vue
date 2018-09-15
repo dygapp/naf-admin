@@ -4,7 +4,10 @@
       <el-table-column v-for="(item,index) in listFields" :key="'field'+index" :label="item.label" :prop="item.name" :formatter="item.formatter" v-bind="item.options" />
       <el-table-column label="操作" width="100" v-if="!readonly">
         <template slot-scope="scope">
-          <el-button v-for="(item,index) in operItems" :key="'field'+index" @click="handleOper(item, scope.row)" type="text" size="small">{{item.label}}</el-button>
+          <el-button v-for="(item,index) in operItems" :key="'field'+index" @click="handleOper(item, scope.row)" type="text" size="small">
+            <el-tooltip v-if="item.icon" :content="item.label"><i :class="item.icon"></i></el-tooltip>
+            <span v-else>{{item.label}}</span>
+          </el-button>
         </template>
       </el-table-column>
     </slot>
@@ -24,7 +27,7 @@ export default {
       default: () => ({ size: 'mini' })
     } /* 表格扩展属性 */,
     operation: {
-      default: () => [['edit', '编辑'], ['delete', '删除', true]]
+      default: () => [['edit', '编辑', 'el-icon-edit'], ['delete', '删除', 'el-icon-delete', true]]
     } /* 操作类型 */,
     data: Array
   },

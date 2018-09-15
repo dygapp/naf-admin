@@ -3,9 +3,12 @@
     <el-card class="left">
       <div slot="header" class="top">
         <span>{{productName}}</span>
-        <el-button icon="el-icon-edit" style="float: right; padding: 3px 0" type="text" @click="setCurrent()"> </el-button>
+        <el-tooltip content="取消选择">
+        <i class="naf-icons naf-icon-clearup" style="float: right; padding: 3px 0" @click="resetCurrent()"/>
+        </el-tooltip>
+        <!-- <el-button icon="el-icon-edit" style="float: right; padding: 3px 0" type="text" @click="setCurrent()"> </el-button> -->
       </div>
-      <dept-tree @selected="setCurrent" :data-items="items"></dept-tree>
+      <dept-tree ref="dept-tree" @selected="setCurrent" :data-items="items"></dept-tree>
     </el-card>
     <el-card class="right list" size="mini" v-if="view ==  'list'">
       <div slot="header" class="clearfix">
@@ -20,7 +23,7 @@
         <span>{{form.isNew?'添加部门':'修改部门' }}</span>
         <el-button icon="el-icon-arrow-left" style="float: right; padding: 3px 10px;" type="text" @click="view = 'list'">返回</el-button>
       </div>
-      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}" @save="handleSave">
+      <data-form :data="form.data" :is-new="form.isNew" :meta="fields" :rules="rules" :options="{'label-width':'120px', size: 'small'}" @save="handleSave" @cancel="view = 'list'">
       </data-form>
     </el-card>
   </div>
@@ -81,6 +84,10 @@ export default {
       this.form = { data: { parentid }, isNew: true };
       this.view = 'details';
     },
+    resetCurrent() {
+      this.$refs['dept-tree'].setCurrentKey(null);
+      this.setCurrent();
+    },
     async handleSave(payload) {
       let res;
       if (payload.isNew) {
@@ -107,28 +114,5 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.mixed {
-  min-height: 100%;
-  width: 900px;
-  padding-right: 10px;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-}
-.el-card {
-  min-height: 100%;
-}
-.el-card /deep/ .el-card__header {
-  padding: 10px;
-}
-.left {
-  width: 260px;
-}
-.left .top {
-  justify-content: space-around;
-  align-items: left;
-}
-.right {
-  flex: 1;
-}
+@import './style/mixed.less';
 </style>

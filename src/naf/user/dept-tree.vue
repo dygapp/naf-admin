@@ -1,6 +1,6 @@
 <template>
   <div class="nav-tree">
-    <el-tree :data="treeItems" :props="navProps" @node-click="handleNavClick" :highlight-current="true"></el-tree>
+    <el-tree ref="tree" :data="treeItems" :props="navProps" node-key="id" @node-click="handleNavClick" :highlight-current="true"></el-tree>
   </div>
 </template>
 <script>
@@ -21,6 +21,9 @@ export default {
     handleNavClick(data) {
       this.$emit('selected', data);
     },
+    setCurrentKey(key) {
+      this.$refs['tree'].setCurrentKey(key);
+    }
   },
   computed: {
     treeItems() {
