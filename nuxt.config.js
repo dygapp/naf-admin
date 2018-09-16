@@ -58,7 +58,12 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    ['@nuxtjs/proxy', { pathRewrite: { '.*/api/system/dict' : '/', '.*/api/system' : '/' } }],
+    ['@nuxtjs/proxy', {
+      pathRewrite: {
+        '.*/api/system/dict': '/', '.*/api/system': '/',
+        '.*/api/naf/code': '/api', '.*/api/naf': '/api',
+      }
+    }],
     '@nuxtjs/axios',
     // '~/modules/router-meta'
   ],
@@ -74,6 +79,8 @@ module.exports = {
   proxy: [
     `http://localhost:7002${url_prefix}/api/system/dict`,
     `http://localhost:7001${url_prefix}/api/system`,
+    `http://localhost:7002${url_prefix}/api/naf/dict`,
+    `http://localhost:7001${url_prefix}/api/naf`,
   ],
   loader: [
     {
@@ -94,7 +101,7 @@ module.exports = {
           "styleLibraryName": "theme-chalk"
         }]
       ]
-    },    
+    },
     /*
     ** Run ESLint on save
     */
